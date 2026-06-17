@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Mời Đám Cưới - Hoàng Nam & Thanh Tú</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #2b080c; /* Màu đỏ rượu chát sâu như hình nền */
+            font-family: 'Playfair Display', serif;
+            overflow: hidden;
+        }
+
+        /* Hiệu ứng chuyển cảnh: Rẽ lối tơ hồng */
+        .gate-wrapper {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            z-index: 9999;
+        }
+        .gate-panel {
+            width: 50%;
+            height: 100%;
+            background: #500e14; /* Màu đỏ của phông nền chính */
+            transition: transform 1.3s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+        .panel-left { border-right: 1px solid rgba(244, 235, 217, 0.2); transform-origin: left; }
+        .panel-right { border-left: 1px solid rgba(244, 235, 217, 0.2); transform-origin: right; }
+
+        /* Khung nội dung thiệp chính giữa màn hình desktop / Full màn hình mobile */
+        .invitation-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 420px;
+            height: 480px;
+            background-color: #b01c23; /* Đỏ tươi rực rỡ của cánh thiệp */
+            border-radius: 12px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(244, 235, 217, 0.3);
+            transition: all 0.8s ease;
+            /* Thêm hiệu ứng Pattern hoa văn rồng phượng chìm */
+            background-image: radial-gradient(rgba(244, 235, 217, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        /* Vòng tròn hỷ biểu tượng trên cùng */
+        .hỷ-badge {
+            width: 45px;
+            height: 45px;
+            background: #f4ebd9;
+            border-radius: 50%;
+            color: #b01c23;
+            font-size: 22px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px rgba(244, 235, 217, 0.4);
+        }
+
+        .couple-name {
+            font-size: 32px;
+            color: #f4ebd9;
+            font-weight: 700;
+            line-height: 1.4;
+            letter-spacing: 1px;
+        }
+        .ampersand {
+            font-size: 20px;
+            color: rgba(244, 235, 217, 0.7);
+            font-style: italic;
+            margin: 5px 0;
+        }
+
+        .date-txt {
+            font-size: 14px;
+            color: #f4ebd9;
+            margin-top: 20px;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        .invite-label {
+            font-size: 13px;
+            color: rgba(244, 235, 217, 0.6);
+            margin-top: 25px;
+            font-style: italic;
+        }
+        .guest-name {
+            font-size: 18px;
+            color: #f4ebd9;
+            font-weight: bold;
+            margin: 5px 0 15px 0;
+            border-bottom: 1px dashed rgba(244, 235, 217, 0.4);
+            padding-bottom: 3px;
+            min-width: 120px;
+        }
+        .sub-invite {
+            font-size: 11px;
+            color: rgba(244, 235, 217, 0.7);
+            margin-bottom: 30px;
+        }
+
+        /* Nút mở thiệp thiết kế bo góc trứng dài giống hệt mẫu mẫu */
+        .btn-open {
+            background: #f4ebd9;
+            color: #b01c23;
+            border: none;
+            padding: 10px 45px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn-open:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(244, 235, 217, 0.8);
+        }
+
+        /* Chữ hỷ rơi nền */
+        .bg-glow-text {
+            position: absolute;
+            color: rgba(244, 235, 217, 0.04);
+            font-size: 18px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Trạng thái khi kích hoạt chuyển trang */
+        .slide-left { transform: translateX(-100%); }
+        .slide-right { transform: translateX(100%); }
+        .fade-out { opacity: 0; transform: translate(-50%, -50%) scale(0.9); filter: blur(5px); }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow-text" style="top: 20%; left: 10%;">囍</div>
+    <div class="bg-glow-text" style="top: 40%; left: 85%;">囍</div>
+    <div class="bg-glow-text" style="top: 70%; left: 15%;">囍</div>
+
+    <div class="invitation-card" id="mainCard">
+        <div class="hỷ-badge">囍</div>
+        <div class="couple-name">
+            <p>Hoàng Nam</p>
+            <div class="ampersand">&</div>
+            <p>Thanh Tú</p>
+        </div>
+        <div class="date-txt">1 tháng 2, 2026</div>
+        
+        <div class="invite-label">Kính mời</div>
+        <div class="guest-name">Anh Tuấn</div>
+        <div class="sub-invite">đến dự buổi tiệc chung vui cùng gia đình</div>
+
+        <button class="btn-open" onclick="animateAndOpen()">Mở thiệp</button>
+    </div>
+
+    <div class="gate-wrapper" id="gate">
+        <div class="gate-panel panel-left" id="pLeft"></div>
+        <div class="gate-panel panel-right" id="pRight"></div>
+    </div>
+
+    <script>
+        function animateAndOpen() {
+            // Biến mất thẻ nội dung
+            document.getElementById('mainCard').classList.add('fade-out');
+            
+            // Rẽ lối hai cánh cửa phông nền sang 2 bên
+            document.getElementById('pLeft').classList.add('slide-left');
+            document.getElementById('pRight').classList.add('slide-right');
+
+            setTimeout(() => {
+                window.location.href = 'thiepmoi.html';
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

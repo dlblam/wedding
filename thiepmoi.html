@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lời Mời Trân Trọng - ThiepMoi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #e5dac4; /* Màu nền sang trọng của tổng thể */
+            font-family: 'Playfair Display', serif;
+            color: #4a332e;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Khung trục thiết bị di động tối ưu viền đỏ chạy dọc hai bên thân máy */
+        .mobile-container {
+            width: 100%;
+            max-width: 430px;
+            background: #f4ebd9; /* Đúng màu giấy mỹ thuật kem nhạt trong ảnh */
+            border-left: 4px solid #8f1a23;
+            border-right: 4px solid #8f1a23;
+            padding-bottom: 60px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.15);
+        }
+
+        /* Thanh tiêu đề khối đỏ đô chạy ngang thân trang cực đặc trưng trong hình mẫu */
+        .bar-title {
+            background-color: #8f1a23;
+            color: #f4ebd9;
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            padding: 10px 0;
+            letter-spacing: 2px;
+            margin: 25px 0;
+        }
+
+        /* Khối Avatar tròn đôi của Cô dâu & Chú rể */
+        .avatar-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 30px 15px;
+            position: relative;
+        }
+        .avatar-block {
+            text-align: center;
+            width: 40%;
+        }
+        .circle-thumb {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #8f1a23;
+            padding: 3px;
+            background: #f4ebd9;
+        }
+        .role-lbl { font-size: 11px; color: #888; margin-top: 8px; font-style: italic;}
+        .name-lbl { font-size: 16px; font-weight: bold; color: #8f1a23; margin-top: 3px;}
+        
+        .center-hỷ {
+            font-size: 28px;
+            color: #8f1a23;
+            font-weight: bold;
+            border: 1px dashed #8f1a23;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Nội dung chi tiết thông tin */
+        .content-box {
+            padding: 0 25px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .parents-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 11px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        .announce-title {
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #8f1a23;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .main-names {
+            font-size: 24px;
+            color: #8f1a23;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        /* Khối lịch ngày tháng thời gian */
+        .wedding-time-details {
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        .big-date {
+            font-size: 22px;
+            font-weight: bold;
+            color: #8f1a23;
+            border-top: 1px solid rgba(143, 26, 35, 0.3);
+            border-bottom: 1px solid rgba(143, 26, 35, 0.3);
+            padding: 8px 0;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Album cưới thiết kế dạng lưới 4 ô vuông hoàn chỉnh như ảnh số 2 */
+        .photo-grid-album {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 0 20px;
+        }
+        .photo-grid-album img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+
+        /* Lịch biểu tháng mini dưới cùng có trái tim đánh dấu */
+        .mini-calendar {
+            background: #fffdf9;
+            border: 1px solid #dcd1ba;
+            padding: 15px;
+            border-radius: 8px;
+            max-width: 260px;
+            margin: 20px auto;
+            font-size: 12px;
+        }
+        .cal-row { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; margin-bottom: 5px;}
+        .cal-day { padding: 4px 0; position: relative;}
+        .heart-marked { background: #8f1a23; color: white; border-radius: 50%; font-weight: bold; }
+
+        /* Khung bản đồ, lưu bút & phong bì */
+        .section-padding { padding: 0 20px; text-align: center;}
+        .input-style {
+            width: 100%; padding: 10px; margin-bottom: 10px;
+            border: 1px solid #dcd1ba; border-radius: 4px; background: #fffdf9;
+        }
+        .btn-submit {
+            background: #8f1a23; color: white; border: none; padding: 10px 30px;
+            border-radius: 20px; font-weight: 600; cursor: pointer;
+        }
+        .qr-box { background: #fffdf9; border: 1px dashed #8f1a23; padding: 15px; border-radius: 8px; margin-top: 15px;}
+
+        /* Đĩa nhạc xoay tròn */
+        #music-btn {
+            position: fixed; bottom: 20px; right: 20px; background: #fff;
+            border: 2px solid #8f1a23; width: 42px; height: 42px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; z-index: 9999; cursor: pointer;
+        }
+        .spin { animation: rotation 4s linear infinite; }
+        @keyframes rotation { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <audio id="weddingPlayer" loop>
+        <source src="public/Music/EM ĐỒNG Ý (I DO) - ĐỨC PHÚC x 911 x KHẮC HƯNG _ OFFICIAL MUSIC VIDEO _ VALENTINE 2023 [IOe0tNoUGv8].mp3" type="audio/mp3">
+    </audio>
+    <div id="music-btn" class="spin" onclick="controlAudio()">🎵</div>
+
+    <div class="mobile-container">
+        
+        <div class="avatar-section">
+            <div class="avatar-block">
+                <img src="https://picsum.photos/200/200?random=1" class="circle-thumb" alt="Groom">
+                <p class="role-lbl">Trưởng Nam</p>
+                <p class="name-highlight">Tên Chú Rể</p>
+            </div>
+            
+            <div class="center-hỷ">囍</div>
+
+            <div class="avatar-block">
+                <img src="https://picsum.photos/200/200?random=2" class="circle-thumb" alt="Bride">
+                <p class="role-lbl">Ái Nữ</p>
+                <p class="name-highlight">Ánh Dương</p>
+            </div>
+        </div>
+
+        <div class="bar-title">THÔNG TIN LỄ CƯỚI</div>
+
+        <div class="content-box">
+            <div class="parents-grid">
+                <div>
+                    <p><b>Ông:</b> Trần Văn Tuấn</p>
+                    <p><b>Bà:</b> Trần Thị Mai</p>
+                    <p style="font-size:9px; color:#888;">Quận 1, TP. Hồ Chí Minh</p>
+                </div>
+                <div>
+                    <p><b>Ông:</b> Lê Văn Hùng</p>
+                    <p><b>Bà:</b> Hà Thị Lan</p>
+                    <p style="font-size:9px; color:#888;">Quận 3, TP. Hồ Chí Minh</p>
+                </div>
+            </div>
+
+            <p class="announce-title">TRÂN TRỌNG BÁO TIN LỄ THÀNH HÔN CỦA CON CHÚNG TÔI</p>
+            <h3 class="main-names">Trần Hoàng Nam</h3>
+            <p style="font-size: 12px; color: #888; font-style: italic;">Sánh duyên cùng</p>
+            <h3 class="main-names">Lê Thanh Tú</h3>
+
+            <div class="wedding-time-details">
+                <p>LỄ THÀNH HÔN ĐƯỢC CỬ HÀNH TẠI TƯ GIA</p>
+                <p style="font-size: 13px; color:#666;">Vào lúc 09:00</p>
+                <div class="big-date">
+                    <span>CHỦ NHẬT</span>
+                    <span>01</span>
+                    <span>THÁNG 02</span>
+                </div>
+                <p><b>2026</b></p>
+                <p style="font-size: 11px; color:#8f1a23;">(Tức ngày 14/12 năm Ất Tỵ)</p>
+            </div>
+        </div>
+
+        <div class="bar-title">ALBUM ẢNH CƯỚI</div>
+        <div class="photo-grid-album">
+            <img src="https://picsum.photos/300/300?random=11" alt="img1">
+            <img src="https://picsum.photos/300/300?random=12" alt="img2">
+            <img src="https://picsum.photos/300/300?random=13" alt="img3">
+            <img src="https://picsum.photos/300/300?random=14" alt="img4">
+        </div>
+
+        <div class="bar-title">THÔNG TIN TIỆC CƯỚI</div>
+        <div class="content-box">
+            <p>TIỆC CƯỚI SẼ DIỄN RA VÀO LÚC <b>11:30</b> cùng ngày</p>
+            
+            <div class="mini-calendar">
+                <p style="font-weight: bold; margin-bottom: 10px; text-align: center;">Tháng 2 / 2026</p>
+                <div class="cal-row" style="font-weight: 600; color:#8f1a23;">
+                    <span>CN</span><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span>
+                </div>
+                <div class="cal-row">
+                    <span class="cal-day heart-marked">1</span><span class="cal-day">2</span><span class="cal-day">3</span><span class="cal-day">4</span><span class="cal-day">5</span><span class="cal-day">6</span><span class="cal-day">7</span>
+                </div>
+                <div class="cal-row">
+                    <span class="cal-day">8</span><span class="cal-day">9</span><span class="cal-day">10</span><span class="cal-day">11</span><span class="cal-day">12</span><span class="cal-day">13</span><span class="cal-day">14</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bar-title">TIỆC CƯỚI SẼ TỔ CHỨC TẠI</div>
+        <div class="section-padding">
+            <p style="font-size: 13px; margin-bottom: 10px;">Trung tâm hội nghị tiệc cưới Riverside Palace</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.065842886749!2d106.6560935!3d10.8062534!" width="100%" height="180" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <div class="bar-title">GỬI LỜI CHÚC PHÚC</div>
+        <div class="section-padding">
+            <form onsubmit="alert('Cảm ơn bạn!'); return false;">
+                <input type="text" class="input-style" placeholder="Tên của bạn" required>
+                <textarea class="input-style" rows="3" placeholder="Lời chúc gửi tới hai bạn..." required></textarea>
+                <button type="submit" class="btn-submit">XÁC NHẬN</button>
+            </form>
+        </div>
+
+        <div class="bar-title">PHONG BÌ MỪNG CƯỚI</div>
+        <div class="section-padding">
+            <div class="qr-box">
+                <p style="font-size: 13px; font-weight: bold; color:#8f1a23;">MỪNG CHÚ RỂ & CÔ DÂU</p>
+                <div style="width: 130px; height: 130px; background: #ddd; margin: 10px auto;">Mã QR</div>
+                <p style="font-size:12px;">Số tài khoản: 1903xxxxxxxxx - Techcombank</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const audio = document.getElementById('weddingPlayer');
+        let userInteracted = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.play().catch(() => console.log("Chờ tương tác phát nhạc"));
+            startAutoScrollEngine();
+        });
+
+        // THUẬT TOÁN TỰ ĐỘNG CUỘN ĐẶC BIỆT: ƯU TIÊN TUYỆT ĐỐI THAO TÁC CỦA KHÁCH
+        function startAutoScrollEngine() {
+            setTimeout(() => {
+                if (userInteracted) return; // Nếu khách đã chạm tay lướt trước, tắt tự cuộn
+
+                let speed = 0.5; // Cuộn cực kỳ từ tốn, mượt như nhung
+                function scrollStep() {
+                    if (!userInteracted && (window.innerHeight + window.scrollY) < document.body.offsetHeight) {
+                        window.scrollBy(0, speed);
+                        requestAnimationFrame(scrollStep);
+                    }
+                }
+                requestAnimationFrame(scrollStep);
+            }, 2000); // Bắt đầu tự cuộn sau khi vào trang 2 giây
+        }
+
+        // LẮNG NGHE TẤT CẢ CÁC HÀNH VI CHẠM MÀN HÌNH ĐỂ TRẢ QUYỀN CUỘN LẠI CHO KHÁCH
+        const events = ['touchstart', 'mousedown', 'wheel', 'pointerdown'];
+        events.forEach(ev => {
+            window.addEventListener(ev, () => {
+                userInteracted = true; // Kích hoạt cờ dừng cuộn vĩnh viễn
+            }, { passive: true });
+        });
+
+        function controlAudio() {
+            const btn = document.getElementById('music-btn');
+            if (audio.paused) {
+                audio.play();
+                btn.classList.add('spin');
+            } else {
+                audio.pause();
+                btn.classList.remove('spin');
+            }
+        }
+    </script>
+</body>
+</html>
