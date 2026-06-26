@@ -1,0 +1,22 @@
+:root {
+  --id-part1: "\0032\0035\0032\0031\0031\0054\0054";
+}
+:root {
+  --id-part2: "\0031\0038\0035\0039\0020\0020\002D";
+}
+:root {
+  --id-part3: "\0020\0020\0044\0041\004E\0047\0020";
+}
+:root {
+  --id-part4: "\004C\0045\0020\0042\0041\004F";
+}
+:root {
+  --id-part5: "\0020\004C\0041\004D";
+}
+html::after {
+        content: "From Lam Bao Dang with love!";
+        position: fixed; bottom: 2%; 
+        left: 50%; transform: translateX(-50%);
+        opacity: .2; z-index: 9e9 !important; 
+        pointer-events: none; font: 11px sans-serif;
+    }

@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thiệp Mời Đám Cưới - Hoàng Nam & Thanh Tú</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Thiệp Mời Đám Cưới - Taki Tachibana & Miyamizu Mitsuha</title>
+    <meta property="og:type" content="website">
+    
+    <meta property="og:title" content="Save The Date - Ngày chung đôi của Taki Tachibana & Miyamizu Mitsuha">
+    
+    <meta property="og:description" content="Sự hiện diện của bạn là niềm vinh hạnh lớn cho gia đình chúng mình. Bấm vào để xem chi tiết thiệp mời nhé!">
+    
+    <meta property="og:url" content="https://dlblam.github.io/wedding/">
+    
+    <meta property="og:image" content="https://dlblam.github.io/wedding/thumbnail.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #2b080c; /* Màu đỏ rượu chát sâu như hình nền */
+            background-color: #2b080c;
+            /* Màu đỏ rượu chát sâu như hình nền */
             font-family: 'Playfair Display', serif;
             overflow: hidden;
         }
@@ -21,14 +42,24 @@
             display: flex;
             z-index: 9999;
         }
+
         .gate-panel {
             width: 50%;
             height: 100%;
-            background: #500e14; /* Màu đỏ của phông nền chính */
+            background: #500e14;
+            /* Màu đỏ của phông nền chính */
             transition: transform 1.3s cubic-bezier(0.85, 0, 0.15, 1);
         }
-        .panel-left { border-right: 1px solid rgba(244, 235, 217, 0.2); transform-origin: left; }
-        .panel-right { border-left: 1px solid rgba(244, 235, 217, 0.2); transform-origin: right; }
+
+        .panel-left {
+            border-right: 1px solid rgba(244, 235, 217, 0.2);
+            transform-origin: left;
+        }
+
+        .panel-right {
+            border-left: 1px solid rgba(244, 235, 217, 0.2);
+            transform-origin: right;
+        }
 
         /* Khung nội dung thiệp chính giữa màn hình desktop / Full màn hình mobile */
         .invitation-card {
@@ -39,9 +70,10 @@
             width: 90%;
             max-width: 420px;
             height: 480px;
-            background-color: #b01c23; /* Đỏ tươi rực rỡ của cánh thiệp */
+            background-color: #b01c23;
+            /* Đỏ tươi rực rỡ của cánh thiệp */
             border-radius: 12px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
             z-index: 10000;
             display: flex;
             flex-direction: column;
@@ -49,18 +81,26 @@
             justify-content: center;
             padding: 30px;
             text-align: center;
-            border: 1px solid rgba(244, 235, 217, 0.3);
             transition: all 0.8s ease;
-            /* Thêm hiệu ứng Pattern hoa văn rồng phượng chìm */
-            background-image: radial-gradient(rgba(244, 235, 217, 0.05) 1px, transparent 0);
-            background-size: 24px 24px;
+
+            /* NÂNG CẤP: Hoa văn Long Phụng mạ vàng chìm quý phái dùng mã SVG nhúng tinh tế */
+            background-image:
+                linear-gradient(135deg, rgba(244, 235, 217, 0.15) 0%, transparent 100%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5t-5 10h10zm0 50t-5-10h10zM5 30t10-5v10zm50 0t-10-5v10z' fill='%23d4af37' fill-opacity='0.08'/%3E%3C/svg%3E");
+            background-size: cover, 40px 40px;
+
+            /* NÂNG CẤP: Viền chỉ vàng kép góc hoàng gia */
+            outline: 1px solid rgba(212, 175, 55, 0.4);
+            outline-offset: -10px;
+            border: 3px solid #d4af37;
+            /* Màu vàng Gold sang trọng */
         }
 
         /* Vòng tròn hỷ biểu tượng trên cùng */
         .hỷ-badge {
             width: 45px;
             height: 45px;
-            background: #f4ebd9;
+            background: linear-gradient(135deg, #fcf8f2 0%, #f4ebd9 100%);
             border-radius: 50%;
             color: #b01c23;
             font-size: 22px;
@@ -70,6 +110,19 @@
             align-items: center;
             margin-bottom: 25px;
             box-shadow: 0 0 15px rgba(244, 235, 217, 0.4);
+            border: 1px solid #d4af37;
+            animation: pulseGlow 2s infinite alternate;
+            /* Hiệu ứng đập nhẹ */
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            }
+
+            100% {
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+            }
         }
 
         .couple-name {
@@ -78,7 +131,9 @@
             font-weight: 700;
             line-height: 1.4;
             letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
+
         .ampersand {
             font-size: 20px;
             color: rgba(244, 235, 217, 0.7);
@@ -100,6 +155,7 @@
             margin-top: 25px;
             font-style: italic;
         }
+
         .guest-name {
             font-size: 18px;
             color: #f4ebd9;
@@ -109,6 +165,7 @@
             padding-bottom: 3px;
             min-width: 120px;
         }
+
         .sub-invite {
             font-size: 11px;
             color: rgba(244, 235, 217, 0.7);
@@ -117,21 +174,23 @@
 
         /* Nút mở thiệp thiết kế bo góc trứng dài giống hệt mẫu mẫu */
         .btn-open {
-            background: #f4ebd9;
+            background: linear-gradient(135deg, #fcf8f2 0%, #f4ebd9 100%);
             color: #b01c23;
-            border: none;
+            border: 1px solid #d4af37;
             padding: 10px 45px;
             font-size: 14px;
             font-weight: 600;
             border-radius: 25px;
             cursor: pointer;
             letter-spacing: 1px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
         }
+
         .btn-open:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(244, 235, 217, 0.8);
+            background: linear-gradient(135deg, #ffffff 0%, #f4ebd9 100%);
+            box-shadow: 0 0 25px rgba(244, 235, 217, 0.8), inset 0 0 5px rgba(212, 175, 55, 0.5);
         }
 
         /* Chữ hỷ rơi nền */
@@ -144,12 +203,122 @@
         }
 
         /* Trạng thái khi kích hoạt chuyển trang */
-        .slide-left { transform: translateX(-100%); }
-        .slide-right { transform: translateX(100%); }
-        .fade-out { opacity: 0; transform: translate(-50%, -50%) scale(0.9); filter: blur(5px); }
+        .slide-left {
+            transform: translateX(-100%);
+        }
+
+        .slide-right {
+            transform: translateX(100%);
+        }
+
+        .fade-out {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.9);
+            filter: blur(5px);
+        }
+
+        /* ==================== ĐỒ HỌA BỔ SUNG KHÔNG SỬA CODE CŨ ==================== */
+
+        /* Đường cắt sao băng Tiamat rạch đôi bầu trời chạng vạng khi ấn nút */
+        .anime-comet {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 140%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #8bf3ff, #ff8ba4, transparent);
+            transform: rotate(-40deg);
+            z-index: 10005;
+            opacity: 0;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px #8bf3ff);
+        }
+
+        .anime-comet.active {
+            animation: cometSlash 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes cometSlash {
+            0% {
+                transform: translate(-30%, -30%) rotate(-40deg);
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(40%, 40%) rotate(-40deg);
+                opacity: 0;
+            }
+        }
+
+        /* Vòng tròn Musubi bùng nổ lan tỏa lộng lẫy */
+        .musubi-wave {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 10px;
+            height: 10px;
+            border: 2px solid #ff8ba4;
+            border-radius: 50%;
+            z-index: 10004;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .musubi-wave.active {
+            animation: waveExpand 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+
+        @keyframes waveExpand {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+                border-color: #8bf3ff;
+            }
+
+            50% {
+                border-color: #ff5e7e;
+                box-shadow: 0 0 30px rgba(255, 94, 126, 0.6);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(150);
+                opacity: 0;
+            }
+        }
+
+        /* Bụi tinh tú ánh kim phát sáng từ hư không */
+        .star-dust {
+            position: fixed;
+            background: #fff;
+            border-radius: 50%;
+            z-index: 10006;
+            pointer-events: none;
+            animation: flyDust 1.2s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes flyDust {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--mx), var(--my)) scale(0);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
+
 <body>
+
+    <div class="anime-comet" id="cometEffect"></div>
+    <div class="musubi-wave" id="waveEffect"></div>
 
     <div class="bg-glow-text" style="top: 20%; left: 10%;">囍</div>
     <div class="bg-glow-text" style="top: 40%; left: 85%;">囍</div>
@@ -158,15 +327,37 @@
     <div class="invitation-card" id="mainCard">
         <div class="hỷ-badge">囍</div>
         <div class="couple-name">
-            <p>Hoàng Nam</p>
+            <p>Taki Tachibana</p>
             <div class="ampersand">&</div>
-            <p>Thanh Tú</p>
+            <p>Miyamizu Mitsuha</p>
         </div>
         <div class="date-txt">1 tháng 2, 2026</div>
-        
+
         <div class="invite-label">Kính mời</div>
-        <div class="guest-name">Anh Tuấn</div>
+
+        <div class="guest-name" id="guestNameDisplay">Quý khách</div>
+
         <div class="sub-invite">đến dự buổi tiệc chung vui cùng gia đình</div>
+
+        <script>
+            // Hàm tự động lấy tên khách từ đường link URL
+            function getGuestName() {
+                const urlParams = new URLSearchParams(window.location.search);
+                // Tìm chữ ?guest= hoặc ?name= trên đường link
+                let guestName = urlParams.get('guest') || urlParams.get('name');
+
+                if (guestName) {
+                    // Giải mã chữ có dấu nếu link bị mã hóa (ví dụ: Anh%20Tu%E1%BA%A5n -> Anh Tuấn)
+                    guestName = decodeURIComponent(guestName).trim();
+
+                    // Cập nhật vào giao diện
+                    document.getElementById('guestNameDisplay').innerText = guestName;
+                }
+            }
+
+            // Chạy hàm lấy tên ngay khi trang web vừa tải xong
+            window.addEventListener('DOMContentLoaded', getGuestName);
+        </script>
 
         <button class="btn-open" onclick="animateAndOpen()">Mở thiệp</button>
     </div>
@@ -178,17 +369,56 @@
 
     <script>
         function animateAndOpen() {
-            // Biến mất thẻ nội dung
+            // === THÀNH PHẦN THÊM MỚI: HIỆU ỨNG ÂM THANH KHI ẤN NÚT ===
+            // Sử dụng file âm thanh "Click/Woosh" ngắn nhẹ nhàng, sang trọng phù hợp với hiệu ứng chuyển động vũ trụ
+            const audioEffect = new Audio('public/Music/nutbam.mp3');
+            audioEffect.volume = 0.6; // Đặt âm lượng vừa phải
+            audioEffect.play().catch(error => console.log("Trình duyệt chặn tự động phát âm thanh:", error));
+
+            // KÍCH HOẠT ĐỒ HỌA HOÀNG HÔN TINH TÚ CAO CẤP PHÁT SINH
+            document.getElementById('cometEffect').classList.add('active');
+            document.getElementById('waveEffect').classList.add('active');
+
+            // Tạo luồng bụi sao lấp lánh (Star Dust) bắn ra từ trung tâm nút bấm
+            for (let i = 0; i < 40; i++) {
+                const dust = document.createElement('div');
+                dust.classList.add('star-dust');
+
+                // Vị trí xuất phát từ giữa màn hình (nơi đặt nút bấm)
+                dust.style.left = '50%';
+                dust.style.top = '50%';
+
+                // Kích thước ngẫu nhiên mảnh mai tinh tế
+                const size = Math.random() * 4 + 2;
+                dust.style.width = size + 'px';
+                dust.style.height = size + 'px';
+
+                // Phối màu ánh kim vũ trụ (Xanh ngọc pha hồng phấn)
+                dust.style.background = Math.random() > 0.5 ? '#8bf3ff' : '#ff94b8';
+                dust.style.boxShadow = `0 0 10px ${dust.style.background}`;
+
+                // Tính toán góc bắn ngẫu nhiên ra toàn không gian
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 300 + 100;
+                dust.style.setProperty('--mx', Math.cos(angle) * distance + 'px');
+                dust.style.setProperty('--my', Math.sin(angle) * distance + 'px');
+
+                document.body.appendChild(dust);
+                setTimeout(() => dust.remove(), 1200);
+            }
+
+            // Biến mất thẻ nội dung (GIỮ NGUYÊN CODE CŨ CỦA BẠN)
             document.getElementById('mainCard').classList.add('fade-out');
-            
-            // Rẽ lối hai cánh cửa phông nền sang 2 bên
+
+            // Rẽ lối hai cánh cửa phông nền sang 2 bên (GIỮ NGUYÊN CODE CŨ CỦA BẠN)
             document.getElementById('pLeft').classList.add('slide-left');
             document.getElementById('pRight').classList.add('slide-right');
 
             setTimeout(() => {
                 window.location.href = 'thiepmoi.html';
-            }, 1200);
+            }, 1200); // Khớp hoàn hảo với thời gian kết thúc của hiệu ứng hạt tinh tú
         }
     </script>
 </body>
+
 </html>

@@ -1,0 +1,99 @@
+/* =======================================================
+   PHONG CÁCH 1: HOÀNG GIA / CỔ ĐIỂN (Luxury Royal)
+   - Phù hợp cho: Chữ "SSR", Tiêu đề lớn, Tên vật phẩm hiếm
+   - Đặc điểm: Chữ in hoa, có chân thon mảnh, cực kỳ quyền lực
+   ======================================================= */
+#font-royal {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    text-transform: uppercase; /* Tự động viết hoa toàn bộ cho sang */
+    letter-spacing: 3px;       /* Giãn cách các khoảng chữ ra cho thoáng */
+    color: #ffd700;            /* Màu vàng gold */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* =======================================================
+   PHONG CÁCH 2: QUÝ PHÁI / THƠ MỘNG (Elegant Serif)
+   - Phù hợp cho: Lời chúc đám cưới, câu trích dẫn, lời thoại văn thơ
+   - Đặc điểm: Chữ có chân, dáng nghiêng mềm mại như chữ viết tay quý tộc
+   ======================================================= */
+#font-elegant {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;        /* Dáng chữ nghiêng quý phái */
+    font-weight: 600;
+    font-size: 1.2rem;         /* Tăng kích thước nhẹ */
+    color: #e0a96d;            /* Màu vàng đồng ấm áp */
+    line-height: 1.5;
+}
+
+/* =======================================================
+   PHONG CÁCH 3: HIỆN ĐẠI / TINH TẾ (Modern Clean)
+   - Phù hợp cho: Các đoạn mô tả, nút bấm (Button), bảng thông số
+   - Đặc điểm: Không chân (Sans-serif), nét thanh mảnh, rất dễ đọc và công nghệ
+   ======================================================= */
+#font-modern {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;          /* Nét chữ thanh mảnh (Light) */
+    letter-spacing: 1px;
+    color: #ffffff;
+    opacity: 0.9;              /* Hơi trong suốt nhẹ nhìn cho nghệ */
+}
+
+/* =======================================================
+   PHONG CÁCH 4: NGHỆ THUẬT / ẤN TƯỢNG (Editorial Dramatic)
+   - Phù hợp cho: Tên các phần lớn, tiêu đề phụ cần nhấn mạnh
+   - Đặc điểm: Kết hợp giữa nét dày và nét mỏng, đậm chất tạp chí thời trang lớn
+   ======================================================= */
+#font-editorial {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-style: normal;
+    color: #f8f9fa;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3); /* Đường gạch chân mảnh màu gold */
+    padding-bottom: 5px;
+}
+/* =======================================================
+   KIỂU 1: LÃNG MẠN & TRUYỀN THỐNG (Great Vibes)
+   - Phù hợp: Viết tên Cô Dâu & Chú Rể, chữ "Wedding"
+   - Đặc điểm: Các nét chữ nối liền nhau mượt mà, uốn vừa phải, rất sang
+   ======================================================= */
+#font-wedding-vibes {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem; /* Font này nên để to nhìn mới rõ nét uốn */
+    color: #8f1a23;    /* Màu vàng gold hoàng gia */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* =======================================================
+   KIỂU 2: CỰC KỲ BAY BƯỚM / QUÝ TỘC (Pinyon Script)
+   - Phù hợp: Lời mời, các từ nhấn mạnh như "Love", "Forever"
+   - Đặc điểm: Nét chữ nghiêng nhiều, có những vòng vèo vuốt nhọn cực kỳ sắc sảo
+   ======================================================= */
+#font-wedding-luxury {
+    font-family: 'Pinyon Script', cursive;
+    /* font-size: 2.8rem; */
+    color: #8f1a23;    /* Màu hồng pastel lãng mạn (bạn có thể đổi màu) */
+    font-weight: 400;
+}
+
+/* =======================================================
+   KIỂU 3: NHẸ NHÀNG & THANH LỊCH (Alex Brush)
+   - Phù hợp: Viết các đoạn thơ, lời chúc đám cưới dài
+   - Đặc điểm: Vòng vèo nhưng nét chữ thanh mảnh, gọn gàng, dễ đọc nhất trong các loại chữ kiểu
+   ======================================================= */
+#font-wedding-elegant {
+    font-family: 'Alex Brush', cursive;
+    font-size: 2.2rem;
+    color: #f4a261;    /* Màu cam cam pastel ấm áp */
+}
+
+/* =======================================================
+   KIỂU 4: SIÊU HOA VĂN / CỔ ĐIỂN PHÁP (Monsieur La Doulaise)
+   - Phù hợp: Chỉ nên dùng cho 1-2 từ ngắn, hoặc chữ cái đầu tiên của tên
+   - Đặc điểm: Chữ cái in hoa uốn lượn "gồng ghềnh" phức tạp như hoàng gia Pháp ngày xưa
+   ======================================================= */
+#font-wedding-vintage {
+    font-family: 'Monsieur La Doulaise', cursive;
+    font-size: 3rem;
+    color: #b5838d;    /* Màu hồng đất nhã nhặn */
+}
