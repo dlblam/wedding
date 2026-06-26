@@ -1381,6 +1381,37 @@
             requestAnimationFrame(animateCoin);
         }
 
+        // =================================================================
+        // ĐOẠN KHÓA CỨNG MÀN HÌNH TẦNG HỆ THỐNG - CƠ HỘI CUỐI ĂN NGAY LẬP TỨC
+        // =================================================================
+        (function () {
+            function cancelScroll(event) {
+                event.preventDefault();
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const container = document.getElementById('envelopeContainer');
+                if (!container) return;
+
+                // Bắt sự kiện bằng cơ chế Capture (true) để chặn đứng từ gốc trước khi trình duyệt kịp cuộn
+                container.addEventListener('touchstart', function (e) {
+                    const envelope = document.getElementById('luckyEnvelope');
+                    if (envelope && !envelope.classList.contains('opened')) {
+
+                        // 🔒 KHÓA CHẶT TẦNG HỆ THỐNG
+                        window.addEventListener('touchmove', cancelScroll, { passive: false });
+                        document.body.style.overflow = 'hidden';
+
+                        // 🔓 TỰ ĐỘNG THÁO XÍCH SAU 1.5 GIÂY (Xong xuôi hiệu ứng)
+                        setTimeout(() => {
+                            window.removeEventListener('touchmove', cancelScroll);
+                            document.body.style.overflow = '';
+                        }, 1500);
+                    }
+                }, true); // <- true này là mấu chốt để chạy trước cơ chế cuộn của mobile
+            });
+        })();
+
         // TRÒ CHƠI SĂN GIF HIẾM KHI CLICK ẢNH TRANG TRÍ
         let isGifActive = false;
         function triggerDecorMiniGame(e) {
