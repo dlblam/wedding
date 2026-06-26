@@ -1325,34 +1325,24 @@
 
         // BIẾN ĐỔI PHONG BAO LÌ XÌ & TUNG ĐỒNG TIỀN VÀNG SANG TRỌNG
         function openLuckyEnvelope(event) {
-            // 1. Chặn trình duyệt di động nhảy cuộn lung tung
+            // 1. Chặn trình duyệt tự cuộn lung tung
             if (event) {
                 event.preventDefault();
                 event.stopPropagation();
             }
+            // 2. Lưu ngay vị trí cuộn hiện tại của người dùng trước khi đổi giao diện
+            const thuyenCuon = window.pageYOffset || document.documentElement.scrollTop;
 
-            // 2. Lấy khung cha chứa phong bì (chính là thẻ div có style="position: relative; min-height: 300px;")
-            const sectionPadding = document.getElementById('envelopeContainer').parentElement;
-
-            if (sectionPadding) {
-                // Khóa chặt chiều cao hiện tại của nó lại, không cho hụt layout
-                sectionPadding.style.height = sectionPadding.offsetHeight + 'px';
-            }
-
-            // --- GIỮ NGUYÊN ĐOẠN CODE XỬ LÝ ẨN/HIỆN CŨ CỦA BẠN Ở ĐÂY ---
-            // Ví dụ code cũ của bạn đang là:
+            // --- ĐOẠN CODE HIỆN TẠI ĐANG CHẠY ỔN CỦA BẠN (Giữ nguyên hoàn toàn) ---
+            // Ví dụ code cũ của bạn:
             document.getElementById('luckyEnvelope').style.display = 'none';
-            document.getElementById('qrBox').style.display = 'block'; // hoặc .classList.add('show')...
-            // -----------------------------------------------------------
+            document.getElementById('qrBox').style.display = 'block';
+            // ... bất kỳ code cũ nào của bạn ở đây giữ nguyên ...
+            // ------------------------------------------------------------------
 
-            // 3. Sau khi mọi thứ hiện xong (khoảng 0.3 giây), trả lại tự do cho chiều cao để nó tự co giãn theo QR
-            setTimeout(() => {
-                if (sectionPadding) {
-                    sectionPadding.style.height = 'auto';
-                }
-            }, 300);
+            // 3. Ép màn hình đứng im tại vị trí cũ, không cho trôi lên
+            window.scrollTo(0, thuyenCuon);
         }
-
         // THUẬT TOÁN TẠO ĐỒNG TIỀN XU RƠI TỰ DO
         function createCoin(startX, startY) {
             const coin = document.createElement('div');
