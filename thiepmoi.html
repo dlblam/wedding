@@ -1324,30 +1324,33 @@
         }
 
         // BIẾN ĐỔI PHONG BAO LÌ XÌ & TUNG ĐỒNG TIỀN VÀNG SANG TRỌNG
-        function openLuckyEnvelope(e) {
-            // 1. Chặn tuyệt đối hành vi cuộn mặc định và sự kiện lan truyền của trình duyệt di động
-            if (e) {
-                e.preventDefault();
-                e.stopPropagation();
+        function openLuckyEnvelope(event) {
+            // 1. Chặn trình duyệt di động nhảy cuộn lung tung
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
             }
 
-            // 2. Lưu lại vị trí cuộn hiện tại của màn hình điện thoại trước khi mở bao
-            const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+            // 2. Lấy khung cha chứa phong bì (chính là thẻ div có style="position: relative; min-height: 300px;")
+            const sectionPadding = document.getElementById('envelopeContainer').parentElement;
 
-            // 3. Thực hiện các hiệu ứng mở bao lì xì và hiện QR của bạn
-            const envelope = document.getElementById('luckyEnvelope');
-            const qrBox = document.getElementById('qrBox');
-
-            if (envelope && qrBox) {
-                envelope.classList.add('opened'); // Hoặc code ẩn bao cũ của bạn: envelope.style.display = 'none';
-                qrBox.classList.add('show');      // Hoặc code hiện QR cũ của bạn: qrBox.style.display = 'block';
+            if (sectionPadding) {
+                // Khóa chặt chiều cao hiện tại của nó lại, không cho hụt layout
+                sectionPadding.style.height = sectionPadding.offsetHeight + 'px';
             }
 
-            // 4. Ép màn hình đứng im tại vị trí cũ, không cho phép trình duyệt tự động trôi lên
-            window.scrollTo({
-                top: currentScrollPos,
-                behavior: 'auto' // Giữ màn hình đứng im lập tức không tạo độ trễ mượt
-            });
+            // --- GIỮ NGUYÊN ĐOẠN CODE XỬ LÝ ẨN/HIỆN CŨ CỦA BẠN Ở ĐÂY ---
+            // Ví dụ code cũ của bạn đang là:
+            document.getElementById('luckyEnvelope').style.display = 'none';
+            document.getElementById('qrBox').style.display = 'block'; // hoặc .classList.add('show')...
+            // -----------------------------------------------------------
+
+            // 3. Sau khi mọi thứ hiện xong (khoảng 0.3 giây), trả lại tự do cho chiều cao để nó tự co giãn theo QR
+            setTimeout(() => {
+                if (sectionPadding) {
+                    sectionPadding.style.height = 'auto';
+                }
+            }, 300);
         }
 
         // THUẬT TOÁN TẠO ĐỒNG TIỀN XU RƠI TỰ DO
