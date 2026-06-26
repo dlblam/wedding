@@ -404,6 +404,10 @@
         .section-padding {
             padding: 0 20px;
             text-align: center;
+            position: relative;
+            min-height: 480px !important;
+            /* Đẩy hẳn lên 480px hoặc 500px */
+            content-visibility: auto;
         }
 
         .input-style {
@@ -1325,40 +1329,22 @@
 
         // BIẾN ĐỔI PHONG BAO LÌ XÌ & TUNG ĐỒNG TIỀN VÀNG SANG TRỌNG
         function openLuckyEnvelope(e) {
-            e.stopPropagation();
-
+            e.stopPropagation(); // Không kích hoạt cơ chế cuộn trang của container khi ấn phong bì
             const envelope = document.getElementById('luckyEnvelope');
             const qrBox = document.getElementById('qrBox');
 
             if (!envelope.classList.contains('opened')) {
-                // 🔒 KHÓA CỨNG LẬP TỨC: Biến toàn bộ trang web thành ảnh tĩnh khi vừa bấm
-                document.body.style.overflow = 'hidden';
-                document.body.style.touchAction = 'none';
-
                 envelope.classList.add('opened');
 
-                // Tạo hiệu ứng nổ tung đồng tiền xu vàng (Giữ nguyên của ní)
+                // Tạo hiệu ứng nổ tung đồng tiền xu vàng (25 đồng xu cho hoành tráng)
                 for (let i = 0; i < 25; i++) {
                     createCoin(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2);
                 }
 
-                // Hiển thị khung QR mượt mà (Giữ nguyên của ní)
+                // Hiển thị khung QR mượt mà sau khi bao lì xì lật mở hoàn toàn
                 setTimeout(() => {
                     qrBox.classList.add('show');
                 }, 450);
-
-                // 🔓 MỞ KHÓA TỰ ĐỘNG THỜI GIAN THỰC:
-                // Lắng nghe xem khi nào thằng qrBox chạy xong hiệu ứng CSS (show)
-                qrBox.addEventListener('transitionend', function unlock(event) {
-                    // Chỉ bắt sự kiện của chính qrBox (bỏ qua các thẻ con bên trong nó)
-                    if (event.target === qrBox) {
-                        document.body.style.overflow = '';
-                        document.body.style.touchAction = '';
-
-                        // Hủy bỏ lắng nghe này để tránh chạy lại lần sau
-                        qrBox.removeEventListener('transitionend', unlock);
-                    }
-                });
             }
         }
 
