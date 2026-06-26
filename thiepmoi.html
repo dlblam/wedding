@@ -1325,39 +1325,39 @@
 
         // BIẾN ĐỔI PHONG BAO LÌ XÌ & TUNG ĐỒNG TIỀN VÀNG SANG TRỌNG
         function openLuckyEnvelope(e) {
-            e.stopPropagation(); // Giữ nguyên của ní
+            e.stopPropagation();
 
             const envelope = document.getElementById('luckyEnvelope');
             const qrBox = document.getElementById('qrBox');
 
             if (!envelope.classList.contains('opened')) {
-                // 🔥 ĐOẠN FIX: Khóa cứng vị trí cuộn của điện thoại ngay lập tức
-                const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+                // 🔒 KHÓA CỨNG LẬP TỨC: Biến toàn bộ trang web thành ảnh tĩnh khi vừa bấm
+                document.body.style.overflow = 'hidden';
+                document.body.style.touchAction = 'none';
 
                 envelope.classList.add('opened');
 
-                // Tạo hiệu ứng nổ tung đồng tiền xu vàng (Giữ nguyên 100%)
+                // Tạo hiệu ứng nổ tung đồng tiền xu vàng (Giữ nguyên của ní)
                 for (let i = 0; i < 25; i++) {
                     createCoin(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2);
                 }
 
-                // Hiển thị khung QR mượt mà sau khi bao lì xì lật mở hoàn toàn (Giữ nguyên 100%)
+                // Hiển thị khung QR mượt mà (Giữ nguyên của ní)
                 setTimeout(() => {
                     qrBox.classList.add('show');
-
-                    // 🔥 ĐOẠN FIX: Khi QR vừa hiện xong (sau 450ms), ghì màn hình đứng im tại chỗ cũ
-                    window.scrollTo({
-                        top: currentScrollPos,
-                        behavior: 'auto'
-                    });
                 }, 450);
 
-                // Ghì thêm một lần nữa ở các mốc thời gian chuyển cảnh để chặn đứng mọi sự giật lag tự động của mobile
-                let fixTicks = [10, 50, 100, 200, 300, 400];
-                fixTicks.forEach(delay => {
-                    setTimeout(() => {
-                        window.scrollTo(0, currentScrollPos);
-                    }, delay);
+                // 🔓 MỞ KHÓA TỰ ĐỘNG THỜI GIAN THỰC:
+                // Lắng nghe xem khi nào thằng qrBox chạy xong hiệu ứng CSS (show)
+                qrBox.addEventListener('transitionend', function unlock(event) {
+                    // Chỉ bắt sự kiện của chính qrBox (bỏ qua các thẻ con bên trong nó)
+                    if (event.target === qrBox) {
+                        document.body.style.overflow = '';
+                        document.body.style.touchAction = '';
+
+                        // Hủy bỏ lắng nghe này để tránh chạy lại lần sau
+                        qrBox.removeEventListener('transitionend', unlock);
+                    }
                 });
             }
         }
