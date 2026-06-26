@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lời Mời Trân Trọng - ThiepMoi</title>
+    <title>Lời Mời Trân Trọng</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
@@ -1325,23 +1325,29 @@
 
         // BIẾN ĐỔI PHONG BAO LÌ XÌ & TUNG ĐỒNG TIỀN VÀNG SANG TRỌNG
         function openLuckyEnvelope(e) {
-            e.stopPropagation(); // Không kích hoạt cơ chế cuộn trang của container khi ấn phong bì
+            // 1. Chặn tuyệt đối hành vi cuộn mặc định và sự kiện lan truyền của trình duyệt di động
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            // 2. Lưu lại vị trí cuộn hiện tại của màn hình điện thoại trước khi mở bao
+            const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+
+            // 3. Thực hiện các hiệu ứng mở bao lì xì và hiện QR của bạn
             const envelope = document.getElementById('luckyEnvelope');
             const qrBox = document.getElementById('qrBox');
 
-            if (!envelope.classList.contains('opened')) {
-                envelope.classList.add('opened');
-
-                // Tạo hiệu ứng nổ tung đồng tiền xu vàng (25 đồng xu cho hoành tráng)
-                for (let i = 0; i < 25; i++) {
-                    createCoin(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2);
-                }
-
-                // Hiển thị khung QR mượt mà sau khi bao lì xì lật mở hoàn toàn
-                setTimeout(() => {
-                    qrBox.classList.add('show');
-                }, 450);
+            if (envelope && qrBox) {
+                envelope.classList.add('opened'); // Hoặc code ẩn bao cũ của bạn: envelope.style.display = 'none';
+                qrBox.classList.add('show');      // Hoặc code hiện QR cũ của bạn: qrBox.style.display = 'block';
             }
+
+            // 4. Ép màn hình đứng im tại vị trí cũ, không cho phép trình duyệt tự động trôi lên
+            window.scrollTo({
+                top: currentScrollPos,
+                behavior: 'auto' // Giữ màn hình đứng im lập tức không tạo độ trễ mượt
+            });
         }
 
         // THUẬT TOÁN TẠO ĐỒNG TIỀN XU RƠI TỰ DO
