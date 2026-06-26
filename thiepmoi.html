@@ -1324,25 +1324,41 @@
         }
 
         // BIẾN ĐỔI PHONG BAO LÌ XÌ & TUNG ĐỒNG TIỀN VÀNG SANG TRỌNG
-        function openLuckyEnvelope(event) {
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
+        function openLuckyEnvelope(e) {
+            e.stopPropagation(); // Giữ nguyên của ní
 
             const envelope = document.getElementById('luckyEnvelope');
             const qrBox = document.getElementById('qrBox');
-            const container = document.getElementById('envelopeContainer');
 
-            // Mẹo xịn: Ép khung cha có một chiều cao cố định (khoảng 450px) để chứa vừa vặn khung QR đôi
-            if (container) {
-                container.style.minHeight = '450px';
-            }
+            if (!envelope.classList.contains('opened')) {
+                // 🔥 ĐOẠN FIX: Khóa cứng vị trí cuộn của điện thoại ngay lập tức
+                const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
 
-            // Chạy đoạn code ẩn hiện cũ đang chạy tốt của ní
-            if (envelope && qrBox) {
-                envelope.style.display = 'none'; // Hoặc code ẩn bao cũ của ní
-                qrBox.style.display = 'block';   // Hoặc code hiện QR cũ của ní
+                envelope.classList.add('opened');
+
+                // Tạo hiệu ứng nổ tung đồng tiền xu vàng (Giữ nguyên 100%)
+                for (let i = 0; i < 25; i++) {
+                    createCoin(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2);
+                }
+
+                // Hiển thị khung QR mượt mà sau khi bao lì xì lật mở hoàn toàn (Giữ nguyên 100%)
+                setTimeout(() => {
+                    qrBox.classList.add('show');
+
+                    // 🔥 ĐOẠN FIX: Khi QR vừa hiện xong (sau 450ms), ghì màn hình đứng im tại chỗ cũ
+                    window.scrollTo({
+                        top: currentScrollPos,
+                        behavior: 'auto'
+                    });
+                }, 450);
+
+                // Ghì thêm một lần nữa ở các mốc thời gian chuyển cảnh để chặn đứng mọi sự giật lag tự động của mobile
+                let fixTicks = [10, 50, 100, 200, 300, 400];
+                fixTicks.forEach(delay => {
+                    setTimeout(() => {
+                        window.scrollTo(0, currentScrollPos);
+                    }, delay);
+                });
             }
         }
 
