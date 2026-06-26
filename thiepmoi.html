@@ -1289,24 +1289,7 @@
         <div class="footer-border"></div>
 
     </div>
-    <script>
-        function preventMobileScroll(event) {
-            event.preventDefault();
-        }
 
-        // Bắt sự kiện click riêng biệt để khóa cứng màn hình 1.5 giây
-        document.getElementById('envelopeContainer').addEventListener('click', function () {
-            // 🔒 KHÓA CỨNG
-            window.addEventListener('touchmove', preventMobileScroll, { passive: false });
-            document.body.style.overflow = 'hidden';
-
-            // 🔓 MỞ KHÓA TỰ ĐỘNG: Đúng 1.5 giây (1500ms) sau tự giải thoát
-            setTimeout(() => {
-                window.removeEventListener('touchmove', preventMobileScroll);
-                document.body.style.overflow = '';
-            }, 1000);
-        });
-    </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Khởi tạo thư viện hiệu ứng xuất hiện khi cuộn trang
