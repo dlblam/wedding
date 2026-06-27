@@ -455,16 +455,16 @@
             top: 0;
             transform: translateX(-50%);
             z-index: 5;
-            transition: all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
             transform-origin: bottom center;
             animation: heavyShake 3s infinite ease-in-out;
             cursor: pointer;
         }
 
-        /* HOVER LẮC MẠNH HƠN VÀ ĐỔI MÀU SANG TRỌNG */
+        /* Tắt lắc và thu nhỏ mượt mà khi rà chuột */
         .lucky-envelope:hover {
             animation: none;
-            transform: translateX(-50%) scale(1.06) rotate(0deg);
+            transform: translateX(-50%) scale(1.05) rotate(0deg);
             box-shadow:
                 0 25px 50px rgba(143, 26, 35, 0.7),
                 0 0 20px rgba(212, 175, 55, 0.6);
@@ -472,7 +472,6 @@
             filter: brightness(1.15);
         }
 
-        /* Hiệu ứng hoạt họa lắc mạnh tinh tế */
         @keyframes heavyShake {
             0% {
                 transform: translateX(-50%) rotate(0deg);
@@ -524,36 +523,39 @@
             text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.6);
         }
 
-        /* Khi click lật mở biến mất */
+        /* HIỆU ỨNG MỚI: Biến mất tinh tế tại tâm, không lộn vòng 3D nặng nề */
         .lucky-envelope.opened {
-            transform: translateX(-50%) rotateY(180deg) scale(0.3) translateY(-100px);
+            transform: translateX(-50%) scale(0.6);
             opacity: 0;
             pointer-events: none;
         }
 
-        /* KHỐI CỬA SỔ MÃ QR ĐÔI SAU KHI PHONG BAO MỞ */
+        /* KHỐI CỬA SỔ MÃ QR ĐÔI (Cố định vị trí Absolute bằng left 50% để không làm sụp layout) */
         .qr-box {
             background: #fffdf9;
             border: 2px dashed #8f1a23;
             padding: 15px 10px;
             border-radius: 12px;
             width: 100%;
+            box-sizing: border-box;
             opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: translateX(-50%) scale(0.85);
             pointer-events: none;
             position: absolute;
             top: 0;
-            left: 0;
+            left: 50%;
+            /* Ghép chặt gốc tọa độ vào giữa */
             z-index: 2;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            /* Hiệu ứng hiện ra nảy nhẹ sang trọng */
         }
 
+        /* KHÔNG DÙNG POSITION RELATIVE Ở ĐÂY NỮA */
         .qr-box.show {
             opacity: 1;
-            transform: scale(1);
+            transform: translateX(-50%) scale(1);
             pointer-events: auto;
-            position: relative;
         }
 
         .qr-double-layout {
@@ -601,16 +603,16 @@
             word-break: break-all;
         }
 
-        /* Đồng xu rơi tự do */
+        /* Đồng xu rơi tự do (Đổi thành FIXED để hạt xu bay độc lập, hoàn toàn không chạm vào body) */
         .coin-particle {
-            position: absolute;
+            position: fixed;
             width: 22px;
             height: 22px;
             background: radial-gradient(circle, #ffe066 20%, #f5b041 100%);
             border-radius: 50%;
             border: 2px solid #d4af37;
             pointer-events: none;
-            z-index: 999;
+            z-index: 9999;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
         }
 
@@ -1244,7 +1246,6 @@
         <div class="section-padding" style="position: relative; min-height: 300px;">
 
             <div class="lucky-envelope-container" id="envelopeContainer" onclick="openLuckyEnvelope(event)">
-                <!-- Phong bao lì xì 3D được làm mới toàn diện -->
                 <div class="lucky-envelope" id="luckyEnvelope">
                     <i class="fa-solid fa-envelope-open-text"></i>
                     <p>MỪNG HẠNH PHÚC</p>
@@ -1252,7 +1253,6 @@
                         để mở bao)</span>
                 </div>
 
-                <!-- Khung QR Đôi xuất hiện mượt mà sau khi mở phong bao -->
                 <div class="qr-box" id="qrBox">
                     <p style="font-size: 13px; font-weight: bold; color:#8f1a23; margin-bottom: 5px;">HÂN HOAN CHÚC PHÚC
                         BẢO GIA</p>
@@ -1260,7 +1260,6 @@
                         quét mã tương ứng:</p>
 
                     <div class="qr-double-layout">
-                        <!-- Cột Nhà Trai -->
                         <div class="qr-card">
                             <div class="qr-title-sub">MỪNG CHÚ RỂ</div>
                             <div class="qr-image-placeholder">Mã QR Trai</div>
@@ -1270,7 +1269,6 @@
                                 Tran Hoang Nam
                             </div>
                         </div>
-                        <!-- Cột Nhà Gái -->
                         <div class="qr-card">
                             <div class="qr-title-sub">MỪNG CÔ DÂU</div>
                             <div class="qr-image-placeholder">Mã QR Gái</div>
@@ -1323,28 +1321,41 @@
             document.getElementById('lightbox').style.display = 'flex';
         }
 
-        // BIẾN ĐỔI PHONG BAO LÌ XÌ & TUNG ĐỒNG TIỀN VÀNG SANG TRỌNG
         function openLuckyEnvelope(e) {
-            e.stopPropagation(); // Không kích hoạt cơ chế cuộn trang của container khi ấn phong bì
+            if (e) e.stopPropagation();
+
             const envelope = document.getElementById('luckyEnvelope');
             const qrBox = document.getElementById('qrBox');
 
-            if (!envelope.classList.contains('opened')) {
+            if (envelope && !envelope.classList.contains('opened')) {
                 envelope.classList.add('opened');
 
-                // Tạo hiệu ứng nổ tung đồng tiền xu vàng (25 đồng xu cho hoành tráng)
-                for (let i = 0; i < 25; i++) {
-                    createCoin(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2);
+                // Lấy tọa độ ngón tay chạm chính xác, loại bỏ lỗi lệch điểm bắn xu trên mobile
+                let clickX = window.innerWidth / 2;
+                let clickY = window.innerHeight / 2;
+
+                if (e) {
+                    if (e.touches && e.touches[0]) {
+                        clickX = e.touches[0].clientX;
+                        clickY = e.touches[0].clientY;
+                    } else if (e.clientX && e.clientY) {
+                        clickX = e.clientX;
+                        clickY = e.clientY;
+                    }
                 }
 
-                // Hiển thị khung QR mượt mà sau khi bao lì xì lật mở hoàn toàn
+                // Tạo hiệu ứng nổ tung 25 đồng xu từ đúng tâm điểm chạm
+                for (let i = 0; i < 25; i++) {
+                    createCoin(clickX, clickY);
+                }
+
+                // Hiện bảng QR mượt mà sau 250ms (Giảm độ trễ để mang lại cảm giác mượt mà tức thì)
                 setTimeout(() => {
-                    qrBox.classList.add('show');
-                }, 450);
+                    if (qrBox) qrBox.classList.add('show');
+                }, 250);
             }
         }
 
-        // THUẬT TOÁN TẠO ĐỒNG TIỀN XU RƠI TỰ DO
         function createCoin(startX, startY) {
             const coin = document.createElement('div');
             coin.classList.add('coin-particle');
@@ -1354,19 +1365,19 @@
             coin.style.top = startY + 'px';
 
             const angle = Math.random() * Math.PI * 2;
-            const velocity = Math.random() * 10 + 5; // Tăng lực bắn tung xa hơn
+            const velocity = Math.random() * 9 + 4;
             let posX = startX;
             let posY = startY;
             let moveX = Math.cos(angle) * velocity;
-            let moveY = Math.sin(angle) * velocity - 7; // Lực đẩy lên trên mạnh mẽ hơn
-            let gravity = 0.45;
+            let moveY = Math.sin(angle) * velocity - 6;
+            let gravity = 0.4;
             let opacity = 1;
 
             function animateCoin() {
                 moveY += gravity;
                 posX += moveX;
                 posY += moveY;
-                opacity -= 0.015;
+                opacity -= 0.018; // Mờ dần tinh tế
 
                 coin.style.left = posX + 'px';
                 coin.style.top = posY + 'px';
@@ -1380,37 +1391,6 @@
             }
             requestAnimationFrame(animateCoin);
         }
-
-        // =================================================================
-        // ĐOẠN KHÓA CỨNG MÀN HÌNH TẦNG HỆ THỐNG - CƠ HỘI CUỐI ĂN NGAY LẬP TỨC
-        // =================================================================
-        (function () {
-            function cancelScroll(event) {
-                event.preventDefault();
-            }
-
-            document.addEventListener('DOMContentLoaded', function () {
-                const container = document.getElementById('envelopeContainer');
-                if (!container) return;
-
-                // Bắt sự kiện bằng cơ chế Capture (true) để chặn đứng từ gốc trước khi trình duyệt kịp cuộn
-                container.addEventListener('touchstart', function (e) {
-                    const envelope = document.getElementById('luckyEnvelope');
-                    if (envelope && !envelope.classList.contains('opened')) {
-
-                        // 🔒 KHÓA CHẶT TẦNG HỆ THỐNG
-                        window.addEventListener('touchmove', cancelScroll, { passive: false });
-                        document.body.style.overflow = 'hidden';
-
-                        // 🔓 TỰ ĐỘNG THÁO XÍCH SAU 1.5 GIÂY (Xong xuôi hiệu ứng)
-                        setTimeout(() => {
-                            window.removeEventListener('touchmove', cancelScroll);
-                            document.body.style.overflow = '';
-                        }, 1500);
-                    }
-                }, true); // <- true này là mấu chốt để chạy trước cơ chế cuộn của mobile
-            });
-        })();
 
         // TRÒ CHƠI SĂN GIF HIẾM KHI CLICK ẢNH TRANG TRÍ
         let isGifActive = false;
