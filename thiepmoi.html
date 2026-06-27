@@ -994,7 +994,7 @@
             background-repeat: repeat-x;
 
             /* Thiết lập chuyển động */
-            animation: scrollRight 25s linear infinite;
+            animation: scrollInfinite 100s linear infinite !important;
             /* 25s trôi chậm rãi nghệ thuật */
         }
 
@@ -1017,17 +1017,6 @@
             transform: scale(1.03);
             /* Phóng nhẹ ảnh lên tạo điểm nhấn */
             z-index: 10;
-        }
-
-        /* Animation chạy vô hạn từ trái qua phải */
-        @keyframes scrollRight {
-            0% {
-                transform: translateX(-50%);
-            }
-
-            100% {
-                transform: translateX(0);
-            }
         }
 
         .slider-container {
@@ -1057,12 +1046,13 @@
         /* Thuật toán dịch chuyển đúng 50% (vì ta đã nhân bản x2 ở JS) */
         @keyframes scrollInfinite {
             0% {
-                transform: translate3d(0, 0, 0);
+                /* Bắt đầu ở vị trí dịch sang trái 50% */
+                transform: translate3d(-50%, 0, 0);
             }
 
             100% {
-                transform: translate3d(-50%, 0, 0);
-                /* Chạy hết 1 nửa danh sách là reset về 0% không vết nối */
+                /* Chạy dần về vị trí ban đầu (Trái qua Phải) */
+                transform: translate3d(0, 0, 0);
             }
         }
 
@@ -1184,8 +1174,15 @@
             document.addEventListener("DOMContentLoaded", function () {
                 const track = document.querySelector('.slider-track');
                 if (track) {
-                    // Chỉ nhân bản 1 lần duy nhất để tạo hiệu ứng nối đuôi
-                    track.innerHTML += track.innerHTML;
+                    const originalContent = track.innerHTML;
+                    let newContent = originalContent;
+
+                    // [SỬA Ở ĐÂY] Muốn nhân bản bao nhiêu lần thì đổi số 4 ở dưới (Ví dụ: 4 lần + 1 bản gốc = 5 bản)
+                    for (let i = 0; i < 4; i++) {
+                        newContent += originalContent;
+                    }
+
+                    track.innerHTML = newContent;
                 }
             });
         </script>
