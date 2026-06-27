@@ -644,161 +644,396 @@
         }
 
         /* Modal xem ảnh phóng to (Lightbox) */
-        /* --- PHẦN SLIDER DƯỚI: ẨN THANH CUỘN & ĐỊNH HÌNH 3D --- */
-        .more-photos-slider {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 40px 10px;
-            /* Thêm padding dọc để ảnh tâm phóng to không bị cụt */
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            /* Ẩn scrollbar Firefox */
-        }
-
-        .more-photos-slider::-webkit-scrollbar {
-            display: none;
-            /* Ẩn scrollbar Chrome/Safari */
-        }
-
-        /* Hiệu ứng ảnh mờ biên, giữa phóng to đầy tinh tế */
-        .more-photos-slider img {
-            flex: 0 0 160px;
-            /* Định kích thước cố định cho slider */
-            height: 220px;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, filter 0.4s ease;
-            opacity: 0.4;
-            /* Mặc định mờ */
-            filter: grayscale(40%) blur(1px);
-            transform: scale(0.85);
-        }
-
-        /* Class 'active-center' sẽ được JS tự động gán cho ảnh nằm ngay tâm màn hình */
-        .more-photos-slider img.active-center {
-            opacity: 1;
-            filter: grayscale(0%) blur(0px);
-            transform: scale(1.15);
-            /* Ảnh ở giữa nổi bật hẳn lên */
-            box-shadow: 0 15px 30px rgba(143, 26, 35, 0.25);
-            border: 2px solid #fdfaf2;
-        }
-
-
-        /* --- PHẦN LIGHTBOX MODAL CAO CẤP --- */
+        /* ==========================================
+   LIGHTBOX MODAL - THE ROYAL VINTAGE UPGRADE (V2 - 10/10 MASTERPIECE)
+   ========================================== */
         .lightbox-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 10, 10, 0.96);
-            /* Đen ánh nâu huyền bí hợp màu đám cưới */
-            backdrop-filter: blur(12px);
-            /* Làm mờ hậu cảnh sau lưng cực sang */
+
+            /* Nền Burgundy sâu thẳm mang không khí cung điện */
+            background: radial-gradient(circle, rgba(54, 2, 10, 0.97) 0%, rgba(15, 0, 4, 0.99) 100%);
+            backdrop-filter: blur(10px) saturate(110%);
+            -webkit-backdrop-filter: blur(10px) saturate(110%);
+
             z-index: 10000;
             display: none;
             justify-content: center;
             align-items: center;
+            animation: luxuryFadeIn 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        /* ==========================================
+   IMAGE - NÂNG CẤP: KHUNG TRANH HOÀNG GIA ĐAN XEN VÀNG VÀ GỖ
+   ========================================== */
+        .lightbox-modal img {
+            max-width: 75%;
+            /* Thu nhỏ thêm 5% để phô diễn trọn vẹn sự đồ sộ của khung triển lãm */
+            max-height: 75%;
+            border-radius: 0;
+
+            /* TẠO VÂN GỖ SỒI CỔ ĐIỂN (Giữ nguyên kỹ thuật gradients đỉnh cao) */
+            background-color: #5c3c23;
+            background-image:
+                repeating-linear-gradient(to right,
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 10px),
+                repeating-linear-gradient(15deg,
+                    #6f4e37 0px,
+                    #6f4e37 2px,
+                    #5c3c23 2px,
+                    #5c3c23 4px,
+                    rgba(0, 0, 0, 0.15) 4px,
+                    rgba(0, 0, 0, 0.15) 5px);
+            background-blend-mode: overlay;
+
+            /* KỸ THUẬT ĐAN XEN VIỀN VÀNG TRONG VÀ NGOÀI KHUNG GỖ */
+            padding: 24px;
+            /* Phần khoảng trống lộ vân gỗ sồi */
+
+            /* LỚP VÀNG 1 (Trong cùng sát ảnh): Chỉ vàng Antique Gold chạm khắc */
+            border: 4px double #d4af37;
+
+            /* LỚP GỖ CHÍNH (Nằm ngoài lớp vàng 1): Độ dày tạo bằng outline */
+            outline: 18px solid #4a301c;
+
+            /* Khoảng cách tạo đường rãnh khuếch tán ánh sáng */
+            outline-offset: 6px;
+
+            /* LỚP VÀNG 2 VÀ ĐỔ BÓNG ĐA TẦNG (Tích hợp trong box-shadow):
+       Sử dụng nhiều tầng shadow đan xen giữa bóng tối và ánh sáng kim loại để giả lập 
+       các đường gờ nổi dát vàng chạy dọc khung tranh (Beveled Gold Fillet). */
+            box-shadow:
+                /* Viền vàng 2 chạy bọc ngoài cùng khung gỗ */
+                0 0 0 8px #b38b6d,
+                0 0 0 9px #4a301c,
+                /* Đổ bóng sâu tạo độ nặng khối đổ lên nền Burgundy */
+                0 15px 50px rgba(0, 0, 0, 0.95),
+                0 40px 90px rgba(0, 0, 0, 0.85),
+                /* Bóng sập góc trong (Inset) tạo độ sâu hắt từ khung gỗ vào ảnh */
+                inset 0 0 20px rgba(0, 0, 0, 0.6);
+
+            /* Hiệu ứng chuyển động điện ảnh */
+            transform: scale(0.95) translateY(15px);
             opacity: 0;
-            transition: opacity 0.4s ease;
+            animation: cinematicZoom 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s forwards;
+
+            image-rendering: -webkit-optimize-contrast;
+            backface-visibility: hidden;
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .lightbox-modal.show {
-            display: flex;
-            opacity: 1;
+        /* Hiệu ứng Hover: Khung tranh tương tác nhẹ với ánh sáng phòng tranh */
+        .lightbox-modal img:hover {
+            transform: scale(1.005) translateY(0);
+            box-shadow:
+                0 0 0 8px #d4af37,
+                /* Ánh vàng sáng lên khi có góc nhìn trực diện */
+                0 0 0 9px #5c3c23,
+                0 20px 60px rgba(0, 0, 0, 0.98),
+                0 50px 110px rgba(0, 0, 0, 0.9),
+                inset 0 0 25px rgba(0, 0, 0, 0.7);
         }
 
-        .lightbox-content {
-            position: relative;
-            max-width: 85%;
-            max-height: 80%;
-            display: flex;
+        /* ==========================================
+   LIGHTBOX MODAL - THE ROYAL VINTAGE (ROSE GOLD & GLOSSY EDITION)
+   ========================================== */
+        .lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            /* NỀN HỒNG HOÀNG GIA: Tông Hồng Khói (Dusty Rose) chuyển sắc sâu về rìa tối */
+            background: radial-gradient(circle, rgba(114, 59, 73, 0.96) 0%, rgba(36, 14, 21, 0.99) 100%);
+            backdrop-filter: blur(12px) saturate(110%);
+            -webkit-backdrop-filter: blur(12px) saturate(110%);
+
+            z-index: 10000;
+            display: none;
             justify-content: center;
             align-items: center;
+            animation: luxuryFadeIn 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
+        /* ==========================================
+   IMAGE - KHUNG GỖ ĐAN XEN CHỈ VÀNG + HIỆU ỨNG ÁNH SÁNG LƯỚT KÍNH
+   ========================================== */
         .lightbox-modal img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 6px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            border: 3px solid #fffdf9;
+            max-width: 75%;
+            max-height: 75%;
+            border-radius: 4px;
+            /* Bo góc nhẹ tạo sự mềm mại ảnh cưới */
+
+            /* KỸ THUẬT PHỐI HỢP VÂN GỖ CỔ ĐIỂN (Giữ nguyên form đẹp nhất) */
+            background-color: #5c3c23;
+
+            /* NÂNG CẤP ĐỘT PHÁ: Tích hợp dải sáng phản chiếu (Glossy Flash) chạy xéo 45 độ 
+       ngay trên bề mặt thông qua background-image đa lớp kết hợp mix-blend-mode */
+            background-image:
+                linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.25) 45%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.25) 55%, transparent 70%),
+                repeating-linear-gradient(to right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 10px),
+                repeating-linear-gradient(15deg, #6f4e37 0px, #6f4e37 2px, #5c3c23 2px, #5c3c23 4px, rgba(0, 0, 0, 0.15) 4px, rgba(0, 0, 0, 0.15) 5px);
+
+            /* Kích thước dải sáng được kéo giãn ra ngoài phạm vi hiển thị ban đầu để chạy hiệu ứng */
+            background-size: 300% 100%, auto, auto;
+            background-position: 150% 0, 0 0, 0 0;
+            background-repeat: no-repeat, repeat, repeat;
+            background-blend-mode: overlay, overlay, normal;
+
+            /* CẤU TRÚC VIỀN ĐAN XEN VÀNG VÀ GỖ ĐỒ SỘ */
+            padding: 24px;
+
+            /* Lớp chỉ vàng trong cùng sát ảnh */
+            border: 4px double #d4af37;
+
+            /* Khung gỗ dày tạo bằng outline bọc ngoài lớp viền vàng */
+            outline: 18px solid #4a301c;
+            outline-offset: 6px;
+
+            /* Lớp chỉ vàng thứ hai và hiệu ứng gờ nổi đa tầng bọc ngoài rìa khung gỗ */
+            box-shadow:
+                0 0 0 8px #b38b6d,
+                0 0 0 9px #4a301c,
+                /* Đổ bóng sâu tạo độ nổi khối nghệ thuật tuyệt đối */
+                0 15px 50px rgba(0, 0, 0, 0.95),
+                0 40px 90px rgba(0, 0, 0, 0.85),
+                /* Bóng sập góc trong (Inset) */
+                inset 0 0 20px rgba(0, 0, 0, 0.6);
+
+            /* Hiệu ứng xuất hiện điện ảnh */
+            transform: scale(0.95) translateY(15px);
+            opacity: 0;
+
+            /* Kích hoạt đồng thời hiệu ứng zoom xuất hiện VÀ hiệu ứng lướt sáng liên tục */
+            animation:
+                cinematicZoom 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s forwards,
+                glossyShine 6s ease-in-out infinite;
+            /* Cứ 6 giây ánh sáng quét qua mặt gương một lần */
+
+            image-rendering: -webkit-optimize-contrast;
+            backface-visibility: hidden;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease;
         }
 
-        .lightbox-modal.show img {
-            transform: scale(1);
+        /* Hiệu ứng Rê chuột: Ánh vàng gold rực lên tinh tế + Đẩy dải sáng quét nhanh qua */
+        .lightbox-modal img:hover {
+            transform: scale(1.005) translateY(0);
+            background-position: -50% 0, 0 0, 0 0;
+            /* Khi hover, dải sáng tự động lướt qua mặt ảnh */
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), background-position 0.9s ease-in-out;
+            box-shadow:
+                0 0 0 8px #e5a9b4,
+                /* Viền vàng ngả sang sắc hồng Rose Gold lãng mạn */
+                0 0 0 9px #5c3c23,
+                0 20px 60px rgba(0, 0, 0, 0.98),
+                0 50px 110px rgba(0, 0, 0, 0.9),
+                inset 0 0 25px rgba(0, 0, 0, 0.7);
         }
 
-        /* Nút tắt góc phải thanh mảnh, quý phái */
+        /* ==========================================
+   CLOSE BUTTON - HUY HIỆU ẤN TÍN TÔNG HỒNG QUÝ TỘC
+   ========================================== */
         .lightbox-close {
             position: absolute;
-            top: 25px;
-            right: 30px;
-            color: #f4ebd9;
-            font-size: 42px;
-            font-weight: 200;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10002;
-        }
-
-        .lightbox-close:hover {
-            color: #ffd700;
-            transform: rotate(90deg);
-        }
-
-        /* Nút điều hướng hai bên kiểu Designer Portfolio */
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #f4ebd9;
+            top: 40px;
+            right: 40px;
             width: 50px;
             height: 50px;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
             display: flex;
-            align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 10001;
+            align-items: center;
+
+            /* Nền huy hiệu chuyển từ hồng sậm sang đồng cổ */
+            background: radial-gradient(circle, #723b49 0%, #2b1a0e 100%);
+            border: 2px solid #b38b6d;
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.5),
+                inset 0 0 10px rgba(0, 0, 0, 0.8);
+
+            color: #e5a9b4;
+            /* Chữ màu hồng vàng pastel quý tộc */
+            font-size: 20px;
+            font-family: 'Cinzel', 'Times New Roman', serif;
+            font-weight: 300;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .lightbox-nav:hover {
-            background: #8f1a23;
-            color: #fff;
-            box-shadow: 0 0 15px rgba(143, 26, 35, 0.6);
+        /* Hover nút đóng: Xoay ngược và phát sáng một dải màu Rose Gold rực rỡ */
+        .lightbox-close:hover {
+            color: #ffffff;
+            background: radial-gradient(circle, #b15b72 0%, #461421 100%);
+            border-color: #e5a9b4;
+            transform: rotate(180deg) scale(1.15);
+            box-shadow:
+                0 0 25px rgba(229, 169, 180, 0.5),
+                /* Hào quang Rose Gold */
+                inset 0 0 8px rgba(255, 255, 255, 0.3);
         }
 
-        .lightbox-nav.prev {
-            left: 25px;
+        .lightbox-close::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
         }
 
-        .lightbox-nav.next {
-            right: 25px;
+        /* ==========================================
+   ANIMATIONS KEYFRAMES
+   ========================================== */
+        @keyframes luxuryFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
-        /* Ẩn nút nav trên mobile, thay bằng vuốt tay */
+        @keyframes cinematicZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.92) translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Animation tạo hiệu ứng ánh sáng quét xéo tuần hoàn qua mặt kính */
+        @keyframes glossyShine {
+            0% {
+                background-position: 150% 0, 0 0, 0 0;
+            }
+
+            20% {
+                background-position: -50% 0, 0 0, 0 0;
+                /* Quét qua nhanh trong 20% thời gian đầu */
+            }
+
+            100% {
+                background-position: -50% 0, 0 0, 0 0;
+                /* Nghỉ ngơi ở trạng thái đã quét xong cho đến hết chu kỳ */
+            }
+        }
+
+        /* TỐI ƯU DI ĐỘNG */
         @media (max-width: 768px) {
-            .lightbox-nav {
-                display: none;
+            .lightbox-modal {
+                backdrop-filter: blur(6px);
+                background: radial-gradient(circle, rgba(114, 59, 73, 0.99) 0%, rgba(36, 14, 21, 1) 100%);
             }
 
             .lightbox-modal img {
-                max-width: 95%;
+                max-width: 90%;
+                max-height: 68%;
+                padding: 12px;
+                border: 2px double #d4af37;
+                outline: 8px solid #4a301c;
+                outline-offset: 3px;
+                box-shadow:
+                    0 0 0 4px #b38b6d,
+                    0 10px 30px rgba(0, 0, 0, 0.9);
+                /* Trên mobile giảm tần suất lướt sáng để mượt máy */
+                animation:
+                    cinematicZoom 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s forwards,
+                    glossyShine 8s ease-in-out infinite;
+            }
+
+            .lightbox-close {
+                top: 25px;
+                right: 25px;
+                width: 42px;
+                height: 42px;
+                font-size: 16px;
             }
         }
+
+        /* Container bên ngoài - tạo khoảng cách và nền tối nếu muốn */
+        .more-photos-slider {
+            /* overflow: hidden; */
+            width: 100%;
+            /* display: flex;
+            background-color: #111; */
+            /* Nền đen sâu để làm nổi bật cuộn băng */
+        }
+
+        /* Thanh trượt - Biến thành cuộn băng phim */
+        .slider-track {
+            display: flex;
+            gap: 10px;
+            /* Khoảng cách nhỏ giữa các khung hình phim */
+            padding: 25px 0;
+            /* Khoảng trống trên/dưới để làm viền băng */
+            position: relative;
+            background-color: #8f1a23;
+            /* Thân cuộn băng màu đen */
+
+            /* TỰ ĐỘNG VẼ CÁC LỖ ĐỤC CỦA CUỘN BĂNG PHIM */
+            /* Viền trên */
+            background-image:
+                radial-gradient(circle, #ffffff 4px, transparent 5px),
+                /* Viền dưới */
+                radial-gradient(circle, #ffffff 4px, transparent 5px);
+            background-size: 20px 10px;
+            /* Khoảng cách giữa các lỗ đục */
+            background-position: 0 8px, 0 calc(100% - 8px);
+            /* Vị trí lỗ trên và dưới */
+            background-repeat: repeat-x;
+
+            /* Thiết lập chuyển động */
+            animation: scrollRight 25s linear infinite;
+            /* 25s trôi chậm rãi nghệ thuật */
+        }
+
+        /* Các bức ảnh đóng vai trò là từng khung hình (Frames) */
+        .slider-track img {
+            height: 180px;
+            /* Chiều cao khung hình */
+            width: auto;
+            object-fit: cover;
+            flex-shrink: 0;
+            cursor: pointer;
+            border: 4px solid #ffffff;
+            /* Viền đen mỏng bao quanh mỗi ảnh */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        /* Hiệu ứng khi rê chuột vào ảnh */
+        .slider-track img:hover {
+            transform: scale(1.03);
+            /* Phóng nhẹ ảnh lên tạo điểm nhấn */
+            z-index: 10;
+        }
+
+        /* Animation chạy vô hạn từ trái qua phải */
+        @keyframes scrollRight {
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Tạm dừng trôi khi người dùng di chuột vào để xem ảnh kỹ hơn */
+        /* .more-photos-slider:hover .slider-track {
+            animation-play-state: paused;
+        } */
     </style>
 </head>
 
@@ -835,7 +1070,8 @@
 
         <div class="avatar-section">
             <div class="avatar-block" data-aos="fade-right" data-aos-duration="1000">
-                <img src="public/img/Ảnh Cưới/a1.jpg" class="circle-thumb" alt="Groom" onclick="openLightbox(this.src)">
+                <img src="public/img/Ảnh Cưới/a1.jpg" class="circle-thumb" alt="Groom" onclick="openLightbox(this.src)"
+                    id="avatarmain">
                 <p class="role-lbl">Quý Nam</p>
                 <p class="name-highlight">Taki Tachibana</p>
             </div>
@@ -843,7 +1079,8 @@
             <div class="center-hỷ animate__animated animate__pulse animate__infinite">囍</div>
 
             <div class="avatar-block" data-aos="fade-left" data-aos-duration="1000">
-                <img src="public/img/Ảnh Cưới/a2.jpg" class="circle-thumb" alt="Bride" onclick="openLightbox(this.src)">
+                <img src="public/img/Ảnh Cưới/a2.jpg" class="circle-thumb" alt="Bride" onclick="openLightbox(this.src)"
+                    id="avatarmain">
                 <p class="role-lbl">Trưởng Nữ</p>
                 <p class="name-highlight">Miyamizu Mitsuha</p>
             </div>
@@ -895,172 +1132,27 @@
                 <img src="public/img/Ảnh Cưới/a6.jpg" alt="img4" onclick="openLightbox(this.src)">
             </div>
 
-            <p class="slider-hint" data-aos="fade-in">Vuốt ngang xem thêm <i class="fa-solid fa-arrow-right-long"></i>
-            </p>
 
-            <div class="more-photos-slider" data-aos="fade-up" id="marriageSlider">
-                <img src="public/img/Ảnh Cưới/a7.jpg" alt="img5" onclick="openLightbox(this.src)">
-                <img src="public/img/Ảnh Cưới/a8.jpg" alt="img6" onclick="openLightbox(this.src)">
-                <img src="public/img/Ảnh Cưới/a9.jpg" alt="img7" onclick="openLightbox(this.src)">
-                <img src="public/img/Ảnh Cưới/b1.jpg" alt="img8" onclick="openLightbox(this.src)">
-                <img src="public/img/Ảnh Cưới/b2.jpg" alt="img9" onclick="openLightbox(this.src)">
-                <img src="public/img/Ảnh Cưới/b3.jpg" alt="img9" onclick="openLightbox(this.src)">
+            <div class="more-photos-slider" data-aos="fade-up">
+                <div class="slider-track">
+                    <img src="public/img/Ảnh Cưới/a7.jpg" alt="img5" onclick="openLightbox(this.src)">
+                    <img src="public/img/Ảnh Cưới/a8.jpg" alt="img6" onclick="openLightbox(this.src)">
+                    <img src="public/img/Ảnh Cưới/a9.jpg" alt="img7" onclick="openLightbox(this.src)">
+                    <img src="public/img/Ảnh Cưới/b1.jpg" alt="img8" onclick="openLightbox(this.src)">
+                    <img src="public/img/Ảnh Cưới/b2.jpg" alt="img9" onclick="openLightbox(this.src)">
+                    <img src="public/img/Ảnh Cưới/b3.jpg" alt="img9" onclick="openLightbox(this.src)">
+                </div>
             </div>
-        </div>
-
-        <div class="lightbox-modal" id="customLightbox">
-            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-
-            <button class="lightbox-nav prev" onclick="changeLightboxImg(-1)"><i
-                    class="fa-solid fa-chevron-left"></i></button>
-            <div class="lightbox-content">
-                <img src="" id="lightboxImg" alt="Enlarged Wedding Photo">
-            </div>
-            <button class="lightbox-nav next" onclick="changeLightboxImg(1)"><i
-                    class="fa-solid fa-chevron-right"></i></button>
         </div>
         <script>
-            // Quản lý danh sách toàn bộ ảnh cưới phục vụ Lightbox chuyển tiếp
-            const allWeddingImages = Array.from(document.querySelectorAll('.album-wrapper img')).map(img => img.src);
-            let currentImgIndex = 0;
-
-            const slider = document.getElementById('marriageSlider');
-            let autoScrollTimer = null;
-            let restartTimeout = null;
-            let scrollSpeed = 1; // Tốc độ trôi mượt mà (pixels per frame)
-            let isScrollingActive = true;
-
-            // --- 1. THUẬT TOÁN TỰ ĐỘNG CUỘN VÒNG LẶP VÔ TẬN & PHÓNG TỎ GIỮA ---
-            function initSlider() {
-                if (!slider) return;
-
-                // Nhân bản các ảnh bên trong slider để tạo hiệu ứng cuộn vô tận không vết xước
-                const originalCount = slider.children.length;
-                for (let i = 0; i < originalCount; i++) {
-                    const clone = slider.children[i].cloneNode(true);
-                    slider.appendChild(clone);
+            document.addEventListener("DOMContentLoaded", function () {
+                const track = document.querySelector('.slider-track');
+                if (track) {
+                    // Nhân bản để tạo vòng lặp vô tận không vết nối
+                    const clone = track.innerHTML;
+                    track.innerHTML = clone + clone;
                 }
-
-                // Hàm thực hiện trôi mượt từng frame
-                function step() {
-                    if (isScrollingActive) {
-                        slider.scrollLeft += scrollSpeed;
-
-                        // Nếu cuộn đến điểm kết thúc của loạt ảnh gốc, reset về vị trí đầu lén lút
-                        if (slider.scrollLeft >= slider.scrollHeight) {
-                            slider.scrollLeft = 0;
-                        }
-                        updateCenterImage();
-                    }
-                    autoScrollTimer = requestAnimationFrame(step);
-                }
-                autoScrollTimer = requestAnimationFrame(step);
-
-                // Lắng nghe hành vi vuốt tay của khách trên điện thoại
-                slider.addEventListener('touchstart', pauseAutoScrollForEightSecs, { passive: true });
-                slider.addEventListener('scroll', updateCenterImage, { passive: true });
-            }
-
-            // Tính toán ảnh nào đang nằm đúng tâm màn hình để gán class phóng to (.active-center)
-            function updateCenterImage() {
-                const images = slider.querySelectorAll('img');
-                const sliderCenter = slider.getBoundingClientRect().left + (slider.offsetWidth / 2);
-
-                images.forEach(img => {
-                    const rect = img.getBoundingClientRect();
-                    const imgCenter = rect.left + (rect.width / 2);
-
-                    // Nếu tâm ảnh cách tâm slider dưới 90px -> Biến nó thành tiêu điểm chính
-                    if (Math.abs(sliderCenter - imgCenter) < 90) {
-                        img.classList.add('active-center');
-                    } else {
-                        img.classList.remove('active-center');
-                    }
-                });
-            }
-
-            // Hàm tạm dừng tự động trôi 8 giây khi khách sờ tay vào
-            function pauseAutoScrollForEightSecs() {
-                isScrollingActive = false;
-                clearTimeout(restartTimeout);
-
-                // Đúng 8 giây sau tự động kích hoạt chạy lại
-                restartTimeout = setTimeout(() => {
-                    isScrollingActive = true;
-                }, 8000);
-            }
-
-
-            // --- 2. LOGIC LIGHTBOX CHUYỂN ẢNH VÀ CHỐNG CUỘN HIỆU QUẢ ---
-            function openLightbox(src) {
-                isScrollingActive = false; // Tắt tự động trôi lập tức khi xem ảnh lớn
-                clearTimeout(restartTimeout);
-
-                currentImgIndex = allWeddingImages.indexOf(src);
-
-                const modal = document.getElementById('customLightbox');
-                const modalImg = document.getElementById('lightboxImg');
-
-                modalImg.src = src;
-                modal.classList.add('show');
-
-                // Khởi tạo tính năng vuốt ảnh (Swipe) trên Mobile cho Lightbox
-                initLightboxSwipe();
-            }
-
-            function closeLightbox() {
-                const modal = document.getElementById('customLightbox');
-                modal.classList.remove('show');
-
-                // Khách xem xong đóng lại -> kích hoạt đếm ngược 8 giây trước khi chạy lại tự động trôi
-                pauseAutoScrollForEightSecs();
-            }
-
-            // Bấm nút chuyển tiếp ảnh (Next/Prev)
-            function changeLightboxImg(direction) {
-                currentImgIndex += direction;
-                if (currentImgIndex >= allWeddingImages.length) currentImgIndex = 0;
-                if (currentImgIndex < 0) currentImgIndex = allWeddingImages.length - 1;
-
-                const modalImg = document.getElementById('lightboxImg');
-
-                // Hiệu ứng nháy mờ chuyển cảnh tinh tế của Designer
-                modalImg.style.opacity = '0';
-                modalImg.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    modalImg.src = allWeddingImages[currentImgIndex];
-                    modalImg.style.opacity = '1';
-                    modalImg.style.transform = 'scale(1)';
-                }, 200);
-            }
-
-            // Thuật toán vuốt màn hình (Swipe) đổi ảnh lộng lẫy trên điện thoại
-            function initLightboxSwipe() {
-                const modal = document.getElementById('customLightbox');
-                let touchStartX = 0;
-                let touchEndX = 0;
-
-                modal.ontouchstart = e => {
-                    touchStartX = e.changedTouches[0].screenX;
-                };
-
-                modal.ontouchend = e => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    handleSwipe();
-                };
-
-                function handleSwipe() {
-                    const threshold = 50; // Khoảng cách tối thiểu vuốt để tính là chuyển ảnh
-                    if (touchStartX - touchEndX > threshold) {
-                        changeLightboxImg(1); // Vuốt từ phải qua trái -> Xem ảnh tiếp theo
-                    } else if (touchEndX - touchStartX > threshold) {
-                        changeLightboxImg(-1); // Vuốt từ trái qua phải -> Xem ảnh trước đó
-                    }
-                }
-            }
-
-            // Kích hoạt slider khi trang tải xong
-            document.addEventListener('DOMContentLoaded', initSlider);
+            });
         </script>
 
         <div class="bar-title" data-aos="zoom-in">THÔNG TIN TIỆC CƯỚI</div>
@@ -1202,13 +1294,95 @@
 
         </div>
         <div class="bar-title" data-aos="zoom-in">TIỆC CƯỚI SẼ TỔ CHỨC TẠI</div>
-        <div class="section-padding" data-aos="fade-up">
-            <p style="font-size: 13px; margin-bottom: 10px;">Trung tâm Thủ Đức, Trường Cao Đẳng Công Nghệ Thủ Đức</p>
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.474909851657!2d106.75548917583893!3d10.851437757803996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752797e321f8e9%3A0xb3ff69197b10ec4f!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEPDtG5nIG5naOG7hyBUaOG7pyDEkOG7qWM!5e0!3m2!1svi!2s!4v1782470976450!5m2!1svi!2s"
-                width="100%" height="180" style="border:0; border-radius: 8px;" allowfullscreen=""
-                loading="lazy"></iframe>
+        <div class="wedding-location-minimal" data-aos="fade-up">
+            <div class="location-header">
+                <h3 class="location-title">Trung tâm Thủ Đức</h3>
+                <p class="location-subtitle">Trường Cao Đẳng Công Nghệ Thủ Đức</p>
+            </div>
+
+            <div class="map-square-frame">
+                <div class="map-dashed-border">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.474909851657!2d106.75548917583893!3d10.851437757803996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752797e321f8e9%3A0xb3ff69197b10ec4f!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEPDtG5nIG5naOG7hyBUaOG7pyDEkOG7qWM!5e0!3m2!1svi!2s!4v1782470976450!5m2!1svi!2s"
+                        style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
         </div>
+
+        <style>
+            /* Phông chữ hệ thống cơ bản, sang trọng */
+            .wedding-location-minimal {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                max-width: 400px;
+                /* Chiều rộng tổng thể của khối */
+                margin: 20px auto;
+                padding: 20px;
+                background: transparent;
+                text-align: center;
+            }
+
+            /* Phần chữ nổi bật tinh tế */
+            .location-header {
+                margin-bottom: 25px;
+            }
+
+            .location-title {
+                font-size: 18px;
+                font-weight: 700;
+                color: #1a1a1a;
+                /* Chữ đen đậm nổi bật */
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                margin: 0 0 8px 0;
+            }
+
+            .location-subtitle {
+                font-size: 14px;
+                font-weight: 400;
+                color: #555555;
+                margin: 0;
+            }
+
+            /* Khung bản đồ hình vuông (Tỉ lệ 1:1) */
+            .map-square-frame {
+                width: 100%;
+                padding-top: 100%;
+                position: relative;
+                border-radius: 24px;
+                /* Bo góc lớn hơn cho khung ngoài */
+                overflow: hidden;
+            }
+
+            /* Viền NÉT ĐỨT tương phản, cách đều các lề 12px */
+            .map-dashed-border {
+                position: absolute;
+                top: 12px;
+                /* Cách lề trên */
+                left: 12px;
+                /* Cách lề trái */
+                right: 12px;
+                /* Cách lề phải */
+                bottom: 12px;
+                /* Cách lề dưới */
+
+                /* Thiết lập viền nét đứt màu đen đậm tương phản */
+                border: 3px dashed #8f1a23;
+                border-radius: 16px;
+                /* Bo góc cho viền nét đứt */
+                overflow: hidden;
+                /* Buộc bản đồ bên trong phải bo cong theo viền */
+            }
+
+            /* Bản đồ fill đầy khung viền */
+            .map-dashed-border iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+        </style>
 
         <div class="bar-title" data-aos="zoom-in">GỬI LỜI CHÚC PHÚC</div>
         <style>
@@ -1603,7 +1777,7 @@
         // HÀM PHÁT ÂM THANH ĐỒNG XU
         function playCoinSound() {
             // 🎯 CHỖ CẦN THAY THẾ: Thay link này bằng đường dẫn file âm thanh của ní (mp3, wav, m4a...)
-            const soundPath = 'public/Music/dongxu.mp3';
+            const soundPath = 'public/Music/coin-sound.mp3';
 
             const audio = new Audio(soundPath);
 
@@ -1745,7 +1919,7 @@
         // HÀM ĐẢO TRẠNG THÁI CUỘN TỰ ĐỘNG KHI CHẠM VÀO KHOẢNG KHÔNG CỦA THIỆP
         function toggleAutoScrollEngine(e) {
             // Chỉ kích hoạt khi click vào các khoảng không hoặc các thẻ text/div tĩnh, loại trừ form/input/button
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || (e.target.tagName === 'IMG' && e.target.closest('.album-wrapper')) || e.target.tagName === 'BUTTON' || e.target.closest('form')) {
+            if (e.target.tagName === 'INPUT' || e.target.id === 'avatarmain' || e.target.tagName === 'TEXTAREA' || (e.target.tagName === 'IMG' && e.target.closest('.album-wrapper')) || e.target.tagName === 'BUTTON' || e.target.closest('form')) {
                 return;
             }
 
