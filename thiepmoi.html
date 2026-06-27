@@ -1030,6 +1030,42 @@
             }
         }
 
+        .slider-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .slider-track {
+            display: flex;
+            width: max-content;
+            /* Đảm bảo track tự giãn theo số lượng ảnh */
+
+            /* Gọi animation: chạy trong 20 giây, linear (đều nhau), vô hạn */
+            animation: scrollInfinite 20s linear infinite;
+
+            /* Ép mobile dùng GPU để khử giật lag */
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        /* Khi chạm tay vào (trên mobile) hoặc di chuột vào (desktop), slide sẽ dừng lại để dễ bấm chọn ảnh */
+        /* .slider-track:hover,
+        .slider-track:active {
+            animation-play-state: paused;
+        } */
+
+        /* Thuật toán dịch chuyển đúng 50% (vì ta đã nhân bản x2 ở JS) */
+        @keyframes scrollInfinite {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-50%, 0, 0);
+                /* Chạy hết 1 nửa danh sách là reset về 0% không vết nối */
+            }
+        }
+
         /* Tạm dừng trôi khi người dùng di chuột vào để xem ảnh kỹ hơn */
         /* .more-photos-slider:hover .slider-track {
             animation-play-state: paused;
@@ -1148,9 +1184,8 @@
             document.addEventListener("DOMContentLoaded", function () {
                 const track = document.querySelector('.slider-track');
                 if (track) {
-                    // Nhân bản để tạo vòng lặp vô tận không vết nối
-                    const clone = track.innerHTML;
-                    track.innerHTML = clone + clone;
+                    // Chỉ nhân bản 1 lần duy nhất để tạo hiệu ứng nối đuôi
+                    track.innerHTML += track.innerHTML;
                 }
             });
         </script>
