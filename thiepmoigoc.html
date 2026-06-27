@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lời Mời Trân Trọng - ThiepMoi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #e5dac4; /* Màu nền sang trọng của tổng thể */
+            background-color: #e5dac4;
+            /* Màu nền sang trọng của tổng thể */
             font-family: 'Playfair Display', serif;
             color: #4a332e;
             display: flex;
@@ -24,11 +33,12 @@
         .mobile-container {
             width: 100%;
             max-width: 430px;
-            background: #f4ebd9; /* Đúng màu giấy mỹ thuật kem nhạt trong ảnh */
+            background: #f4ebd9;
+            /* Đúng màu giấy mỹ thuật kem nhạt trong ảnh */
             border-left: 4px solid #8f1a23;
             border-right: 4px solid #8f1a23;
             padding-bottom: 60px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.15);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
             position: relative;
             overflow: hidden;
         }
@@ -37,15 +47,16 @@
         .header-border {
             width: 100%;
             height: 45px;
-            background: 
+            background:
                 linear-gradient(to bottom, #4a070b, #8f1a23 50%, #3a0508 100%),
                 radial-gradient(circle at 50% 120%, #d4af37 4px, transparent 5px);
             background-size: 100% 100%, 16px 45px;
             border-bottom: 5px double #d4af37;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
             position: relative;
             z-index: 10;
         }
+
         .header-border::after {
             content: '✨ 囍 ✨';
             position: absolute;
@@ -60,19 +71,21 @@
             border: 2px solid #d4af37;
             font-weight: bold;
             letter-spacing: 2px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
         }
+
         .footer-border {
             width: 100%;
             height: 35px;
-            background: 
+            background:
                 linear-gradient(to top, #6d1017, #8f1a23 40%, #540c12 100%);
             border-top: 3px double #d4af37;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
             margin-top: 50px;
             position: relative;
             z-index: 10;
         }
+
         .footer-border::after {
             content: 'THANK YOU';
             position: absolute;
@@ -87,7 +100,7 @@
             border-radius: 10px;
             border: 1px solid #d4af37;
             letter-spacing: 2px;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
         }
 
         /* KHỐI NỘI DUNG ẢNH ĐẦU TRANG MỚI - CHUNG mỘT LAYER KHÔNG TÁCH BIỆT */
@@ -99,7 +112,7 @@
             gap: 12px;
             position: relative;
         }
-        
+
         /* Container xử lý hiệu ứng lật/đổi mượt mà cho ảnh trang trí */
         .decor-flip-container {
             position: relative;
@@ -110,7 +123,9 @@
             align-items: center;
             justify-content: center;
         }
-        .top-decor-image, .top-decor-gif {
+
+        .top-decor-image,
+        .top-decor-gif {
             width: 100%;
             height: auto;
             object-fit: contain;
@@ -118,16 +133,19 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
             cursor: pointer;
         }
+
         .top-decor-image {
             position: relative;
             z-index: 2;
             opacity: 1;
         }
+
         /* Hiệu ứng hover tinh tế tạo điểm nhấn cho ảnh trang trí */
         .top-decor-image:hover {
             transform: scale(1.03);
             filter: brightness(1.1);
         }
+
         .top-decor-gif {
             position: absolute;
             top: 0;
@@ -136,12 +154,14 @@
             opacity: 0;
             pointer-events: none;
         }
+
         /* Class kích hoạt chuyển trạng thái hiển thị đổi chỗ */
         .decor-flip-container.active .top-decor-image {
             opacity: 0;
             transform: scale(0.9) rotate(-2deg);
             pointer-events: none;
         }
+
         .decor-flip-container.active .top-decor-gif {
             position: absolute;
             opacity: 1;
@@ -155,10 +175,11 @@
             height: 250px;
             object-fit: cover;
             border-radius: 8px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: transform 0.3s ease;
         }
+
         .couple-main-image:hover {
             transform: scale(1.02);
         }
@@ -184,10 +205,12 @@
             padding: 30px 15px;
             position: relative;
         }
+
         .avatar-block {
             text-align: center;
             width: 40%;
         }
+
         .circle-thumb {
             width: 110px;
             height: 110px;
@@ -197,9 +220,21 @@
             padding: 3px;
             background: #f4ebd9;
         }
-        .role-lbl { font-size: 11px; color: #888; margin-top: 8px; font-style: italic;}
-        .name-highlight { font-size: 16px; font-weight: bold; color: #8f1a23; margin-top: 3px;}
-        
+
+        .role-lbl {
+            font-size: 11px;
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .name-highlight {
+            font-size: 16px;
+            font-weight: bold;
+            color: #8f1a23;
+            margin-top: 3px;
+        }
+
         .center-hỷ {
             font-size: 28px;
             color: #8f1a23;
@@ -219,6 +254,7 @@
             text-align: center;
             line-height: 1.6;
         }
+
         .parents-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -227,6 +263,7 @@
             color: #555;
             margin-bottom: 25px;
         }
+
         .announce-title {
             font-size: 12px;
             letter-spacing: 1px;
@@ -234,6 +271,7 @@
             font-weight: 600;
             margin-bottom: 15px;
         }
+
         .main-names {
             font-size: 24px;
             color: #8f1a23;
@@ -246,6 +284,7 @@
             font-size: 14px;
             margin: 20px 0;
         }
+
         .big-date {
             font-size: 22px;
             font-weight: bold;
@@ -264,24 +303,28 @@
             padding: 0 20px;
             position: relative;
         }
+
         .photo-grid-album {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-bottom: 15px;
         }
+
         .photo-grid-album img {
             width: 100%;
             height: 140px;
             object-fit: cover;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
             cursor: pointer;
             transition: transform 0.3s;
         }
+
         .photo-grid-album img:hover {
             transform: scale(1.03);
         }
+
         .more-photos-slider {
             display: flex;
             gap: 10px;
@@ -290,18 +333,21 @@
             scroll-behavior: smooth;
             scrollbar-width: none;
         }
+
         .more-photos-slider::-webkit-scrollbar {
             display: none;
         }
+
         .more-photos-slider img {
             width: 100px;
             height: 100px;
             object-fit: cover;
             border-radius: 6px;
             flex-shrink: 0;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             cursor: pointer;
         }
+
         .slider-hint {
             font-size: 11px;
             color: #8f1a23;
@@ -321,21 +367,51 @@
             margin: 20px auto;
             font-size: 12px;
         }
-        .cal-row { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; margin-bottom: 5px;}
-        .cal-day { padding: 4px 0; position: relative;}
-        .heart-marked { background: #8f1a23; color: white; border-radius: 50%; font-weight: bold; }
+
+        .cal-row {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .cal-day {
+            padding: 4px 0;
+            position: relative;
+        }
+
+        .heart-marked {
+            background: #8f1a23;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+        }
 
         /* Khung bản đồ, lưu bút & phong bì */
-        .section-padding { padding: 0 20px; text-align: center;}
+        .section-padding {
+            padding: 0 20px;
+            text-align: center;
+        }
+
         .input-style {
-            width: 100%; padding: 10px; margin-bottom: 10px;
-            border: 1px solid #dcd1ba; border-radius: 4px; background: #fffdf9;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #dcd1ba;
+            border-radius: 4px;
+            background: #fffdf9;
         }
+
         .btn-submit {
-            background: #8f1a23; color: white; border: none; padding: 10px 30px;
-            border-radius: 20px; font-weight: 600; cursor: pointer;
+            background: #8f1a23;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
         }
-        
+
         /* THIẾT KẾ PHONG BAO MỪNG CƯỚI 3D CAO CẤP MỚI TỪ DESIGNER */
         .lucky-envelope-container {
             position: relative;
@@ -345,15 +421,16 @@
             max-width: 340px;
             min-height: 270px;
         }
+
         .lucky-envelope {
             width: 210px;
             height: 260px;
             background: linear-gradient(135deg, #d32f2f 0%, #9e1c24 60%, #5f090e 100%);
             border-radius: 16px;
-            box-shadow: 
-                0 20px 40px rgba(143,26,35,0.5), 
-                inset 0 0 25px rgba(255,215,0,0.25),
-                0 0 0 1px rgba(212,175,55,0.3);
+            box-shadow:
+                0 20px 40px rgba(143, 26, 35, 0.5),
+                inset 0 0 25px rgba(255, 215, 0, 0.25),
+                0 0 0 1px rgba(212, 175, 55, 0.3);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -370,61 +447,83 @@
             animation: heavyShake 3s infinite ease-in-out;
             cursor: pointer;
         }
-        
+
         /* HOVER LẮC MẠNH HƠN VÀ ĐỔI MÀU SANG TRỌNG */
         .lucky-envelope:hover {
             animation: none;
             transform: translateX(-50%) scale(1.06) rotate(0deg);
-            box-shadow: 
-                0 25px 50px rgba(143,26,35,0.7), 
-                0 0 20px rgba(212,175,55,0.6);
+            box-shadow:
+                0 25px 50px rgba(143, 26, 35, 0.7),
+                0 0 20px rgba(212, 175, 55, 0.6);
             border-color: #fffdf9;
             filter: brightness(1.15);
         }
-        
+
         /* Hiệu ứng hoạt họa lắc mạnh tinh tế */
         @keyframes heavyShake {
-            0% { transform: translateX(-50%) rotate(0deg); }
-            10% { transform: translateX(-50%) rotate(-6deg); }
-            20% { transform: translateX(-50%) rotate(5deg); }
-            30% { transform: translateX(-50%) rotate(-5deg); }
-            40% { transform: translateX(-50%) rotate(4deg); }
-            50% { transform: translateX(-50%) rotate(0deg); }
-            100% { transform: translateX(-50%) rotate(0deg); }
+            0% {
+                transform: translateX(-50%) rotate(0deg);
+            }
+
+            10% {
+                transform: translateX(-50%) rotate(-6deg);
+            }
+
+            20% {
+                transform: translateX(-50%) rotate(5deg);
+            }
+
+            30% {
+                transform: translateX(-50%) rotate(-5deg);
+            }
+
+            40% {
+                transform: translateX(-50%) rotate(4deg);
+            }
+
+            50% {
+                transform: translateX(-50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translateX(-50%) rotate(0deg);
+            }
         }
 
         .lucky-envelope i {
             font-size: 56px;
             color: #ffd700;
             margin-bottom: 15px;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease;
         }
+
         .lucky-envelope:hover i {
             transform: scale(1.15) translateY(-5px);
         }
+
         .lucky-envelope p {
             font-family: 'Cinzel', serif;
             font-size: 14px;
             letter-spacing: 2px;
             font-weight: bold;
             color: #ffffff;
-            text-shadow: 1px 2px 4px rgba(0,0,0,0.6);
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.6);
         }
-        
+
         /* Khi click lật mở biến mất */
         .lucky-envelope.opened {
             transform: translateX(-50%) rotateY(180deg) scale(0.3) translateY(-100px);
             opacity: 0;
             pointer-events: none;
         }
-        
+
         /* KHỐI CỬA SỔ MÃ QR ĐÔI SAU KHI PHONG BAO MỞ */
-        .qr-box { 
-            background: #fffdf9; 
-            border: 2px dashed #8f1a23; 
-            padding: 15px 10px; 
-            border-radius: 12px; 
+        .qr-box {
+            background: #fffdf9;
+            border: 2px dashed #8f1a23;
+            padding: 15px 10px;
+            border-radius: 12px;
             width: 100%;
             opacity: 0;
             transform: scale(0.8);
@@ -434,20 +533,23 @@
             top: 0;
             left: 0;
             z-index: 2;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
+
         .qr-box.show {
             opacity: 1;
             transform: scale(1);
             pointer-events: auto;
             position: relative;
         }
+
         .qr-double-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
             margin-top: 10px;
         }
+
         .qr-card {
             background: #fdfaf2;
             border: 1px solid #e5dac4;
@@ -455,6 +557,7 @@
             padding: 8px;
             text-align: center;
         }
+
         .qr-title-sub {
             font-size: 11px;
             font-weight: bold;
@@ -462,6 +565,7 @@
             margin-bottom: 5px;
             letter-spacing: 0.5px;
         }
+
         .qr-image-placeholder {
             width: 100%;
             aspect-ratio: 1;
@@ -475,6 +579,7 @@
             color: #666;
             border-radius: 4px;
         }
+
         .qr-details {
             font-size: 9px;
             color: #4a332e;
@@ -493,28 +598,148 @@
             border: 2px solid #d4af37;
             pointer-events: none;
             z-index: 999;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.25);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
         }
 
         /* Đĩa nhạc xoay tròn */
         #music-btn {
-            position: fixed; bottom: 20px; right: 20px; background: #fff;
-            border: 2px solid #8f1a23; width: 42px; height: 42px; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; z-index: 9999; cursor: pointer;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #fff;
+            border: 2px solid #8f1a23;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer;
         }
-        .spin { animation: rotation 4s linear infinite; }
-        @keyframes rotation { 100% { transform: rotate(360deg); } }
+
+        .spin {
+            animation: rotation 4s linear infinite;
+        }
+
+        @keyframes rotation {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
         /* Modal xem ảnh phóng to (Lightbox) */
         .lightbox-modal {
-            position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.9); z-index: 10000;
-            display: none; justify-content: center; align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
         }
-        .lightbox-modal img { max-width: 90%; max-height: 80%; border-radius: 4px; box-shadow: 0 0 20px rgba(255,255,255,0.2);}
-        .lightbox-close { position: absolute; top: 20px; right: 20px; color: #fff; font-size: 30px; cursor: pointer;}
+
+        .lightbox-modal img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* 1. KHUNG CHỨA ĐẦU THIỆP - BIẾN THÀNH RÈM NHUNG */
+        .wedding-top-bar {
+            position: relative;
+            width: 100%;
+            height: 60px;
+            /* Chiều cao dải đỏ */
+            background: radial-gradient(circle at 50% -20%, #a82429, #5c0b11);
+            /* Đỏ hoàng gia, có chiều sâu sáng tối */
+            overflow: hidden;
+        }
+
+        /* 2. PHỦ LỚP VÂN GẤM CHÌM (PATTERN) */
+        .wedding-top-bar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.08;
+            /* Làm mờ họa tiết để nhìn sang, không bị rối */
+
+            /* Tạo họa tiết vân lưới đan chéo giả lập vải gấm cổ trang */
+            background-image:
+                linear-gradient(45deg, #ffd700 25%, transparent 25%),
+                linear-gradient(-45deg, #ffd700 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #ffd700 75%),
+                linear-gradient(-45deg, transparent 75%, #ffd700 75%);
+            background-size: 16px 16px;
+            background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+        }
+
+        /* 3. TẠO ĐƯỜNG LƯỢN SÓNG (CUNG ĐÌNH) VÀ VIỀN CHỈ VÀNG KIM */
+        .wedding-top-bar::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 100%;
+            height: 20px;
+            /* Độ cao của sóng */
+
+            /* Vẽ đường lượn sóng bằng SVG trực tiếp trong CSS, không cần file ảnh ngoài */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,42.4V0Z' fill='%23ffd700'/%3E%3Cpath d='M0,0V30c50,15,120,5,180-10,60-15,130-20,190-5,60,15,130,25,190,10,60-15,130-30,190-15,60,15,130,35,190,30,60-5,130-25,190-25v-25Z' fill='%235c0b11'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+
+            /* Tạo hiệu ứng bóng đổ nhẹ cho rèm dải đỏ tách biệt với nền kem */
+            filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.3));
+        }
+
+        /* 4. CHỮ HỶ NẰM CHÍNH GIỮA (HIỆU ỨNG TỎA SÁNG VÀNG KIM) */
+        .wedding-top-bar .chu-hy-box {
+            position: relative;
+            z-index: 10;
+            /* Đẩy lên trên lớp vân gấm */
+            margin: 10px auto 0;
+            width: fit-content;
+            padding: 2px 15px;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            border-radius: 20px;
+            background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b);
+            color: #5c0b11;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+
+            /* Thêm hiệu ứng lấp lánh nhẹ (Glow) */
+            animation: goldGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes goldGlow {
+            0% {
+                box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.9);
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <div class="lightbox-modal" id="lightbox" onclick="this.style.display='none'">
@@ -523,13 +748,15 @@
     </div>
 
     <audio id="weddingPlayer" loop>
-        <source src="public/Music/Suzume no Tojimari ED「Kanata Haluka」Ru's Piano Cover _ カナタハルカ by RADWIMPS [Sheet Music] [z8MTLxdktTo].mp3" type="audio/mp3">
+        <source
+            src="public/Music/Suzume no Tojimari ED「Kanata Haluka」Ru's Piano Cover _ カナタハルカ by RADWIMPS [Sheet Music] [z8MTLxdktTo].mp3"
+            type="audio/mp3">
     </audio>
     <div id="music-btn" class="spin" onclick="controlAudio()">🎵</div>
 
     <!-- Sửa lắng nghe sự kiện click tại khoảng trống container để đảo trạng thái cuộn tự động -->
     <div class="mobile-container" id="mainContainer" onclick="toggleAutoScrollEngine(event)">
-        
+
         <div class="header-border"></div>
 
         <!-- THAY ĐỔI: Khối chứa ảnh đầu trang xếp đè nhau trong cùng một luồng hiển thị -->
@@ -537,26 +764,29 @@
             <!-- Nâng cấp cụm ảnh trang trí lật mở thay thế GIF ngẫu nhiên khi tương tác -->
             <div class="decor-flip-container" id="decorFlipWrapper" onclick="triggerDecorMiniGame(event)">
                 <!-- Ảnh trang trí nằm phía trên ảnh cưới chính -->
-                <img src="public/img/—Pngtree—dragon and phoenix wedding elements_7155883-Photoroom.png" class="top-decor-image" alt="Wedding Element Motif">
+                <img src="public/img/—Pngtree—dragon and phoenix wedding elements_7155883-Photoroom.png"
+                    class="top-decor-image" alt="Wedding Element Motif">
                 <!-- GIF động sẽ thay đổi nguồn ngẫu nhiên bằng JS -->
                 <img src="" class="top-decor-gif" id="topDecorGif" alt="Wedding Animation Motif">
             </div>
-            
+
             <!-- Ảnh cưới chính của cô dâu chú rể -->
             <!-- <img src="https://picsum.photos/600/400?random=100" class="couple-main-image" alt="Wedding Banner" onclick="openLightbox(this.src)"> -->
         </div>
-        
+
         <div class="avatar-section">
             <div class="avatar-block" data-aos="fade-right" data-aos-duration="1000">
-                <img src="https://picsum.photos/200/200?random=1" class="circle-thumb" alt="Groom" onclick="openLightbox(this.src)">
+                <img src="https://picsum.photos/200/200?random=1" class="circle-thumb" alt="Groom"
+                    onclick="openLightbox(this.src)">
                 <p class="role-lbl">Trưởng Nam</p>
                 <p class="name-highlight">Tên Chú Rể</p>
             </div>
-            
+
             <div class="center-hỷ animate__animated animate__pulse animate__infinite">囍</div>
 
             <div class="avatar-block" data-aos="fade-left" data-aos-duration="1000">
-                <img src="https://picsum.photos/200/200?random=2" class="circle-thumb" alt="Bride" onclick="openLightbox(this.src)">
+                <img src="https://picsum.photos/200/200?random=2" class="circle-thumb" alt="Bride"
+                    onclick="openLightbox(this.src)">
                 <p class="role-lbl">Ái Nữ</p>
                 <p class="name-highlight">Ánh Dương</p>
             </div>
@@ -597,7 +827,7 @@
         </div>
 
         <div class="bar-title" data-aos="zoom-in">ALBUM ẢNH CƯỚI</div>
-        
+
         <div class="album-wrapper">
             <div class="photo-grid-album" data-aos="fade-up">
                 <img src="https://picsum.photos/300/300?random=11" alt="img1" onclick="openLightbox(this.src)">
@@ -605,9 +835,10 @@
                 <img src="https://picsum.photos/300/300?random=13" alt="img3" onclick="openLightbox(this.src)">
                 <img src="https://picsum.photos/300/300?random=14" alt="img4" onclick="openLightbox(this.src)">
             </div>
-            
-            <p class="slider-hint" data-aos="fade-in">Vuốt ngang xem thêm <i class="fa-solid fa-arrow-right-long"></i></p>
-            
+
+            <p class="slider-hint" data-aos="fade-in">Vuốt ngang xem thêm <i class="fa-solid fa-arrow-right-long"></i>
+            </p>
+
             <div class="more-photos-slider" data-aos="fade-up">
                 <img src="https://picsum.photos/300/300?random=15" alt="img5" onclick="openLightbox(this.src)">
                 <img src="https://picsum.photos/300/300?random=16" alt="img6" onclick="openLightbox(this.src)">
@@ -620,17 +851,21 @@
         <div class="bar-title" data-aos="zoom-in">THÔNG TIN TIỆC CƯỚI</div>
         <div class="content-box" data-aos="flip-up">
             <p>TIỆC CƯỚI SẼ DIỄN RA VÀO LÚC <b>11:30</b> cùng ngày</p>
-            
+
             <div class="mini-calendar">
                 <p style="font-weight: bold; margin-bottom: 10px; text-align: center;">Tháng 2 / 2026</p>
                 <div class="cal-row" style="font-weight: 600; color:#8f1a23;">
                     <span>CN</span><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span>
                 </div>
                 <div class="cal-row">
-                    <span class="cal-day heart-marked">1</span><span class="cal-day">2</span><span class="cal-day">3</span><span class="cal-day">4</span><span class="cal-day">5</span><span class="cal-day">6</span><span class="cal-day">7</span>
+                    <span class="cal-day heart-marked">1</span><span class="cal-day">2</span><span
+                        class="cal-day">3</span><span class="cal-day">4</span><span class="cal-day">5</span><span
+                        class="cal-day">6</span><span class="cal-day">7</span>
                 </div>
                 <div class="cal-row">
-                    <span class="cal-day">8</span><span class="cal-day">9</span><span class="cal-day">10</span><span class="cal-day">11</span><span class="cal-day">12</span><span class="cal-day">13</span><span class="cal-day">14</span>
+                    <span class="cal-day">8</span><span class="cal-day">9</span><span class="cal-day">10</span><span
+                        class="cal-day">11</span><span class="cal-day">12</span><span class="cal-day">13</span><span
+                        class="cal-day">14</span>
                 </div>
             </div>
         </div>
@@ -638,7 +873,10 @@
         <div class="bar-title" data-aos="zoom-in">TIỆC CƯỚI SẼ TỔ CHỨC TẠI</div>
         <div class="section-padding" data-aos="fade-up">
             <p style="font-size: 13px; margin-bottom: 10px;">Trung tâm hội nghị tiệc cưới Riverside Palace</p>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.065842886749!2d106.6560935!3d10.8062534!" width="100%" height="180" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.065842886749!2d106.6560935!3d10.8062534!"
+                width="100%" height="180" style="border:0; border-radius: 8px;" allowfullscreen=""
+                loading="lazy"></iframe>
         </div>
 
         <div class="bar-title" data-aos="zoom-in">GỬI LỜI CHÚC PHÚC</div>
@@ -652,20 +890,23 @@
 
         <div class="bar-title" data-aos="zoom-in">PHONG BÌ MỪNG CƯỚI</div>
         <div class="section-padding" style="position: relative; min-height: 300px;">
-            
+
             <div class="lucky-envelope-container" id="envelopeContainer" onclick="openLuckyEnvelope(event)">
                 <!-- Phong bao lì xì 3D được làm mới toàn diện -->
                 <div class="lucky-envelope" id="luckyEnvelope">
                     <i class="fa-solid fa-envelope-open-text"></i>
                     <p>MỪNG HẠNH PHÚC</p>
-                    <span style="font-size:10px; opacity:0.8; margin-top:8px; color: #ffd700; font-weight: bold;">(Chạm để mở bao)</span>
+                    <span style="font-size:10px; opacity:0.8; margin-top:8px; color: #ffd700; font-weight: bold;">(Chạm
+                        để mở bao)</span>
                 </div>
 
                 <!-- Khung QR Đôi xuất hiện mượt mà sau khi mở phong bao -->
                 <div class="qr-box" id="qrBox">
-                    <p style="font-size: 13px; font-weight: bold; color:#8f1a23; margin-bottom: 5px;">HÂN HOAN CHÚC PHÚC BẢO GIA</p>
-                    <p style="font-size: 11px; color: #666; font-style: italic;">Quý khách tiện mừng gia đình nào xin quét mã tương ứng:</p>
-                    
+                    <p style="font-size: 13px; font-weight: bold; color:#8f1a23; margin-bottom: 5px;">HÂN HOAN CHÚC PHÚC
+                        BẢO GIA</p>
+                    <p style="font-size: 11px; color: #666; font-style: italic;">Quý khách tiện mừng gia đình nào xin
+                        quét mã tương ứng:</p>
+
                     <div class="qr-double-layout">
                         <!-- Cột Nhà Trai -->
                         <div class="qr-card">
@@ -735,13 +976,13 @@
             e.stopPropagation(); // Không kích hoạt cơ chế cuộn trang của container khi ấn phong bì
             const envelope = document.getElementById('luckyEnvelope');
             const qrBox = document.getElementById('qrBox');
-            
-            if(!envelope.classList.contains('opened')) {
+
+            if (!envelope.classList.contains('opened')) {
                 envelope.classList.add('opened');
-                
+
                 // Tạo hiệu ứng nổ tung đồng tiền xu vàng (25 đồng xu cho hoành tráng)
                 for (let i = 0; i < 25; i++) {
-                    createCoin(e.clientX || window.innerWidth/2, e.clientY || window.innerHeight/2);
+                    createCoin(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2);
                 }
 
                 // Hiển thị khung QR mượt mà sau khi bao lì xì lật mở hoàn toàn
@@ -793,16 +1034,16 @@
         function triggerDecorMiniGame(e) {
             e.stopPropagation(); // Ngăn sự kiện kích hoạt tắt/bật cuộn trang toàn cục
             if (isGifActive) return;
-            
+
             const wrapper = document.getElementById('decorFlipWrapper');
             const gifElement = document.getElementById('topDecorGif');
-            
+
             isGifActive = true;
-            
+
             // Xử lý tỷ lệ ngẫu nhiên: 80% Thường (0.0 đến 0.8), 20% Hiếm (0.8 đến 1.0)
             const rate = Math.random();
             let selectedGif = "";
-            
+
             if (rate < 0.90) {
                 // GIF Thường: Pháo hoa đám cưới lung linh (Bạn có thể đổi link gif tùy chọn tại đây)
                 selectedGif = "public/gif/In Love Dance Sticker by Animanias.gif";
@@ -810,13 +1051,13 @@
                 // GIF Hiếm (20%): Rồng Phượng hoàng kim nhảy múa hoành tráng
                 selectedGif = "public/gif/In Love Kiss Sticker by Animanias.gif";
             }
-            
+
             // Gán link GIF mới để tải ảnh động chính xác từ đầu
             gifElement.src = selectedGif;
-            
+
             // Thêm class kích hoạt hiệu ứng thu đổi mượt mà
             wrapper.classList.add('active');
-            
+
             // Chạy hiệu ứng trong 5 giây sau đó tự động trả về ảnh cũ
             setTimeout(() => {
                 wrapper.classList.remove('active');
@@ -849,7 +1090,7 @@
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON' || e.target.closest('form')) {
                 return;
             }
-            
+
             userInteracted = true; // Xác nhận người dùng đã tương tác trực tiếp
             autoScrollActive = !autoScrollActive; // Đảo trạng thái logic (Đang bật -> Tắt / Đang tắt -> Bật)
 
@@ -865,7 +1106,7 @@
                 // Nếu click trúng vùng chạy tính năng thì để hàm toggle xử lý, cuộn vuốt màn hình thường thì dừng cuộn tự động
                 if (e.type === 'wheel' || e.type === 'touchmove') {
                     userInteracted = true;
-                    autoScrollActive = false; 
+                    autoScrollActive = false;
                 }
             }, { passive: true });
         });
@@ -882,4 +1123,5 @@
         }
     </script>
 </body>
+
 </html>

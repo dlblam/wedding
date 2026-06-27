@@ -1963,7 +1963,7 @@
         }
 
         // LẮNG NGHE THAO TÁC CUỘN TAY CỦA KHÁCH ĐỂ TẠM DỪNG TỰ ĐỘNG
-        const rawScrollEvents = ['pointerdown', 'mousedown', 'touchstart', 'wheel'];
+        const rawScrollEvents = ['pointerdown', 'mousedown', 'touchstart', 'wheel', 'touchmove'];
         rawScrollEvents.forEach(ev => {
             window.addEventListener(ev, (e) => {
                 // Nếu click trúng vùng chạy tính năng thì để hàm toggle xử lý, cuộn vuốt màn hình thường thì dừng cuộn tự động
