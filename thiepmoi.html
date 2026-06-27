@@ -1173,16 +1173,43 @@
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const track = document.querySelector('.slider-track');
-                if (track) {
-                    const originalContent = track.innerHTML;
-                    let newContent = originalContent;
 
-                    // [SỬA Ở ĐÂY] Muốn nhân bản bao nhiêu lần thì đổi số 4 ở dưới (Ví dụ: 4 lần + 1 bản gốc = 5 bản)
-                    for (let i = 0; i < 4; i++) {
+                if (track && track.children.length > 0) {
+                    const originalContent = track.innerHTML;
+
+                    // 1. Tính chiều rộng của 1 cụm ảnh gốc bằng cách cộng chiều rộng các ảnh con
+                    let originalWidth = 0;
+                    Array.from(track.children).forEach(child => {
+                        originalWidth += child.getBoundingClientRect().width;
+                    });
+
+                    // 2. Lấy chiều rộng màn hình thiết bị (người dùng)
+                    const windowWidth = window.innerWidth;
+
+                    // 3. Thuật toán: Tính số lần nhân bản tối thiểu để không bao giờ lộ chân ảnh
+                    // Cần ít nhất 2 lần chiều rộng màn hình để gối đầu khi CSS dịch chuyển
+                    const neededClones = Math.ceil((windowWidth * 2) / originalWidth) + 1;
+
+                    // 4. Tiến hành nhân bản đúng số lượng cần thiết (Rất tiết kiệm tài nguyên)
+                    let newContent = originalContent;
+                    for (let i = 0; i < neededClones; i++) {
                         newContent += originalContent;
                     }
-
                     track.innerHTML = newContent;
+
+                    // 5. Cập nhật lại `@keyframes` bằng JS để khớp CHÍNH XÁC với số lượng nhân bản thực tế
+                    // Bạn không cần vào file CSS sửa tay % nữa, JS tự tính toán tỷ lệ 1 chu kỳ để vòng lặp mượt 100%
+                    const totalLists = neededClones + 1;
+                    const resetPercentage = (1 / totalLists) * 100;
+
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+            @keyframes scrollInfinite {
+                0% { transform: translate3d(-${resetPercentage}%, 0, 0); }
+                100% { transform: translate3d(0, 0, 0); }
+            }
+        `;
+                    document.head.appendChild(style);
                 }
             });
         </script>
