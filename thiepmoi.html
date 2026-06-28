@@ -1798,6 +1798,19 @@
                 }
             }, 2000);
         });
+        // FIX RIÊNG CHO IOS: Kích hoạt nhạc ngay khi có chạm màn hình đầu tiên
+        const playAudioOnIOS = () => {
+            audio.play()
+                .then(() => {
+                    console.log("iOS phát nhạc thành công!");
+                    // Phát được rồi thì tự hủy để không chạy lại nữa
+                    window.removeEventListener('touchstart', playAudioOnIOS);
+                    window.removeEventListener('click', playAudioOnIOS);
+                })
+                .catch(e => console.log("Chờ tương tác tiếp theo...", e));
+        };
+        window.addEventListener('touchstart', playAudioOnIOS);
+        window.addEventListener('click', playAudioOnIOS);
 
         // HÀM HIỂN THỊ PHÓNG TO ẢNH (LIGHTBOX)
         function openLightbox(src) {
