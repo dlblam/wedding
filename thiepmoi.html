@@ -2026,6 +2026,52 @@
             }
         }
     </script>
+    <style>
+        /* BƯỚC 1: Cắt bỏ hoàn toàn mọi thứ dư thừa nằm dưới chân footer */
+        /* Giả định thẻ bao quanh toàn bộ thiệp của bạn là .wrapper hoặc .container, hoặc chính là body */
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+
+    <script>
+        // BƯỚC 2: Tạo hàm "bức tường" chặn cuộn dựa vào vị trí thay đổi liên tục của lời chúc
+        function blockScrollBelowFooter() {
+            const footer = document.querySelector('.footer-border');
+            if (footer) {
+                // Tính toán vị trí đáy thật của footer tại thời điểm hiện tại
+                const footerBottom = footer.offsetTop + footer.offsetHeight;
+
+                // Ép trang web dừng ngay tại chân footer, nội dung hay nền hoa văn thừa bên dưới sẽ bị cắt bỏ
+                document.documentElement.style.maxHeight = footerBottom + 'px';
+                document.body.style.maxHeight = footerBottom + 'px';
+                document.documentElement.style.overflowY = 'auto'; // Vẫn cho cuộn bình thường phía trên
+            }
+        }
+
+        // BƯỚC 3: Dùng MutationObserver để theo dõi khi nào lời chúc đổ vào wishesBox thành công
+        const wishesBox = document.getElementById('wishesBox');
+        if (wishesBox) {
+            const observer = new MutationObserver(() => {
+                // Chỉ cần danh sách lời chúc thay đổi (tải xong hoặc có người gửi mới), cập nhật lại điểm chặn ngay
+                setTimeout(blockScrollBelowFooter, 100);
+            });
+
+            // Bật chế độ theo dõi sự thay đổi bên trong hộp lời chúc
+            observer.observe(wishesBox, { childList: true, subtree: true });
+        }
+
+        // Theo dõi thêm sự kiện click mở bao lì xì của ní ở đoạn code trước
+        const envelopeZone = document.getElementById('envelopeContainer');
+        if (envelopeZone) {
+            envelopeZone.addEventListener('click', () => {
+                setTimeout(blockScrollBelowFooter, 300); // Đợi mở QR xong rồi tính lại
+            });
+        }
+
+        // Dự phòng khi resize màn hình hoặc tải các tài nguyên khác
+        window.addEventListener('resize', blockScrollBelowFooter);
+    </script>
 </body>
 
 </html>
